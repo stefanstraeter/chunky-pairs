@@ -1,0 +1,16 @@
+@use "../abstracts/variables" as v;
+@use "sass:map";
+
+:root {
+  @each $key, $value in map.get(v.$themes, "code-vibes") {
+    --#{$key}: #{$value};
+  }
+}
+
+@each $theme-name, $map in v.$themes {
+  body[data-theme="#{$theme-name}"] {
+    @each $key, $value in $map {
+      --#{$key}: #{$value};
+    }
+  }
+}

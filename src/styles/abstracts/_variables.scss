@@ -1,0 +1,169 @@
+@use "sass:map";
+
+/* ============================================================
+   GLOBAL CONFIG
+   ============================================================ */
+
+$global-config: (
+  "fonts": (
+    "orbitron": (
+      "Orbitron",
+      sans-serif,
+    ),
+    "almarai": (
+      "Almarai",
+      sans-serif,
+    ),
+    "red-rose": (
+      "Red Rose",
+      serif,
+    ),
+  ),
+  "colors": (
+    "bg-dark": #303131,
+    "bg-light": #ffffff,
+    "text-dark": #1d1d1d,
+    "text-light": #ffffff,
+    "accent": #f0ea6e,
+    "light-gray": #ebebeb,
+  ),
+  "button-ui": (
+    "bg": #f0ea6e,
+    "text": #1d1d1d,
+    "hover-bg": #ece444,
+    "hover-text": #1d1d1d,
+    "disabled-bg": #dbdbd6,
+    "disabled-text": #a0a0a0,
+  ),
+  "spacing": (
+    "xs": 0.25rem,
+    "s": 0.5rem,
+    "m": 1rem,
+    "l": 1.5rem,
+    "xl": 2rem,
+    "2xl": 3rem,
+    "3xl": 4rem,
+    "4xl": 5rem,
+  ),
+  "font-size": (
+    "xs": 0.75rem,
+    "sm": 0.875rem,
+    "md": 1rem,
+    "lg": 1.25rem,
+    "xl": 1.5rem,
+    "2xl": 2rem,
+    "3xl": 3rem,
+    "7xl": 7rem,
+  ),
+  "font-weight": (
+    "300": 300,
+    "400": 400,
+    "500": 500,
+    "600": 600,
+    "700": 700,
+    "800": 800,
+  ),
+);
+
+$content-width: 1200px;
+
+/* ============================================================
+   THEMES
+   ============================================================ */
+
+$themes: (
+  "code-vibes": (
+    "main-bg-dark": #303131,
+    "main-bg-light": #ffffff,
+    "player-1": #2bb1ff,
+    "player-2": #f58e39,
+    "btn-primary-bg": #f0ea6e,
+    "btn-primary-text": #303131,
+    "btn-exit-bg": #303131,
+    "btn-exit-hover": #46615c,
+    "btn-exit-text": #ffffff,
+    "btn-back-bg": #65cfbc,
+    "btn-back-hover": #94ddd0,
+    "card-back": #3ec6ad,
+    "status-font-size": 1.25rem,
+    "status-font-weight": 700,
+    "scores-bg": #415652,
+  ),
+  "gaming": (
+    "main-bg": #294f60,
+    "main-bg-dark": #294f60,
+    "main-bg-light": #1a3344,
+    "player-1": #2bb1ff,
+    "player-2": #f58e39,
+    "btn-primary-bg": #ed1a76,
+    "btn-primary-text": #ffffff,
+    "btn-exit-bg": #394b62,
+    "btn-exit-hover": #444863,
+    "btn-exit-text": #ffffff,
+    "btn-back-bg": #ed1b76,
+    "btn-back-hover": #ffffff,
+    "card-back": #e94560,
+    "status-font-size": 1rem,
+    "status-font-weight": 800,
+    "scores-bg": #ffffff,
+  ),
+);
+
+/* ============================================================
+   HELPER FUNCTIONS FOR QUICK ACCESS
+   ============================================================ */
+
+@function config($group, $key) {
+  @return map.get(map.get($global-config, $group), $key);
+}
+
+@function theme-val($theme, $key) {
+  @return map.get(map.get($themes, $theme), $key);
+}
+
+/* ============================================================
+    QUICK ACCESS VARIABLES
+   ============================================================ */
+
+$font-orbitron: config("fonts", "orbitron");
+$font-almarai: config("fonts", "almarai");
+$font-red-rose: config("fonts", "red-rose");
+
+$color-bg-dark: config("colors", "bg-dark");
+$color-bg-light: config("colors", "bg-light");
+$color-text-dark: config("colors", "text-dark");
+$color-text-light: config("colors", "text-light");
+$color-accent: config("colors", "accent");
+$color-light-gray: config("colors", "light-gray");
+
+$btn-ui-bg: config("button-ui", "bg");
+$btn-ui-text: config("button-ui", "text");
+$btn-ui-hover-bg: config("button-ui", "hover-bg");
+$btn-ui-hover-text: config("button-ui", "hover-text");
+$btn-ui-disabled-bg: config("button-ui", "disabled-bg");
+$btn-ui-disabled-text: config("button-ui", "disabled-text");
+
+$spacing-xs: config("spacing", "xs");
+$spacing-s: config("spacing", "s");
+$spacing-m: config("spacing", "m");
+$spacing-l: config("spacing", "l");
+$spacing-xl: config("spacing", "xl");
+$spacing-2xl: config("spacing", "2xl");
+$spacing-3xl: config("spacing", "3xl");
+$spacing-4xl: config("spacing", "4xl");
+
+$font-size-xs: config("font-size", "xs");
+$font-size-sm: config("font-size", "sm");
+$font-size-md: config("font-size", "md");
+$font-size-lg: config("font-size", "lg");
+$font-size-xl: config("font-size", "xl");
+$font-size-2xl: config("font-size", "2xl");
+$font-size-3xl: config("font-size", "3xl");
+$font-size-7xl: config("font-size", "7xl");
+
+$font-weight-300: config("font-weight", "300");
+$font-weight-400: config("font-weight", "400");
+$font-weight-500: config("font-weight", "500");
+$font-weight-600: config("font-weight", "600");
+$font-weight-700: config("font-weight", "700");
+$font-weight-800: config("font-weight", "800");
