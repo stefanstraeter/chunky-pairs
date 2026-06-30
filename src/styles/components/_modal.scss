@@ -42,9 +42,9 @@
   }
 }
 
-body[data-theme="code-vibes"] {
+body[data-theme="magenta-rush"] {
   .game-exit-modal {
-    font-family: v.$font-red-rose;
+    font-family: v.$font-tanker;
     font-size: v.$font-size-lg;
 
     &__dialog {
@@ -79,9 +79,9 @@ body[data-theme="code-vibes"] {
   }
 }
 
-body[data-theme="gaming"] {
+body[data-theme="electric-blue"] {
   .game-exit-modal {
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
     font-size: v.$font-size-lg;
 
     &__dialog {
