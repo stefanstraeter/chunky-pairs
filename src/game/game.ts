@@ -41,7 +41,7 @@ function resetState(): void {
  */
 function handleExitConfirmation(): void {
   resetState();
-  document.body.dataset.theme = 'code-vibes';
+  document.body.dataset.theme = 'magenta-rush';
   showSettingsScreen();
 }
 

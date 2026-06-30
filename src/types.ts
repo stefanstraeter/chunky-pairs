@@ -2,7 +2,7 @@
   TYPES
   ========================================================================== */
 
-export type Theme = 'code-vibes' | 'gaming';
+export type Theme = 'magenta-rush' | 'electric-blue';
 
 export type Player = 'blue' | 'orange';
 

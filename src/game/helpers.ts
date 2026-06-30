@@ -1,7 +1,6 @@
-
-import { gameState } from '../state';
-import { assetPath } from '../assets';
-import type { Player, Winner } from '../types';
+import { gameState } from "../state";
+import { assetPath } from "../assets";
+import type { Player, Winner } from "../types";
 
 /* ==========================================================================
    PURE LOGIC & GAME MECHANICS HELPERS
@@ -13,9 +12,9 @@ import type { Player, Winner } from '../types';
  * @return {Winner}The winner of the game, which can be 'blue', 'orange', or 'draw'.
  */
 export function getWinner(): Winner {
-  if (gameState.scores.blue > gameState.scores.orange) return 'blue';
-  if (gameState.scores.orange > gameState.scores.blue) return 'orange';
-  return 'draw';
+  if (gameState.scores.blue > gameState.scores.orange) return "blue";
+  if (gameState.scores.orange > gameState.scores.blue) return "orange";
+  return "draw";
 }
 
 /**
@@ -24,8 +23,8 @@ export function getWinner(): Winner {
  * @param {Exclude<Winner, 'draw'>} winner - The winner of the game, which can be either 'blue' or 'orange' (but not 'draw').
  * @return {string} A string label representing the winner, such as 'BLUE PLAYER' or 'ORANGE PLAYER'.
  */
-export function getWinnerLabel(winner: Exclude<Winner, 'draw'>): string {
-  return winner === 'blue' ? 'BLUE PLAYER' : 'ORANGE PLAYER';
+export function getWinnerLabel(winner: Exclude<Winner, "draw">): string {
+  return winner === "blue" ? "BLUE PLAYER" : "ORANGE PLAYER";
 }
 
 /**
@@ -53,7 +52,7 @@ export function createCardValues(boardSize: number): number[] {
  * @return {number[]} A new array containing the same numbers as the input array but in a random order.
  */
 function shuffle(array: number[]): number[] {
-  const arr = [...array];  
+  const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -71,7 +70,7 @@ function shuffle(array: number[]): number[] {
  * @return {string} The folder name for the current theme.
  */
 export function getThemeFolder(): string {
-  return gameState.theme === 'gaming' ? 'game_theme' : 'vibes_theme';
+  return gameState.theme === "electric-blue" ? "game_theme" : "vibes_theme";
 }
 
 /**
@@ -81,34 +80,32 @@ export function getThemeFolder(): string {
  * @return {string} The file path to the player's icon image, which varies based on the current theme.
  */
 export function getPlayerIcon(player: Player): string {
-  if (gameState.theme === 'gaming') {
+  if (gameState.theme === "electric-blue") {
     return assetPath(`/img/00_general/chess_${player}.png`);
   }
   return assetPath(`/img/00_general/label_${player}.svg`);
 }
 
-/** 
- * @description Returns the icon path for the given player based on the current theme, using a specific draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+/**
+ * @description Returns the icon path for the given player based on the current theme, using a specific draw icon for the electric-blue theme and a chess piece icon for the magenta-rush theme.
  * @export
  * @param {Player} player - The player for whom to get the winner icon, which can be 'blue' or 'orange'.
- * @return {string} The file path to the winner's icon image, which varies based on the current theme, using a draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+ * @return {string} The file path to the winner's icon image, which varies based on the current theme, using a draw icon for the electric-blue theme and a chess piece icon for the magenta-rush theme.
  */
 export function getWinnerIcon(player: Player): string {
   const activeTheme = document.body.dataset.theme;
-  if (activeTheme === 'gaming') {
-    return assetPath('/img/00_general/draw_icon_game.png');
+  if (activeTheme === "electric-blue") {
+    return assetPath("/img/00_general/draw_icon_game.png");
   }
   return assetPath(`/img/00_general/chess_${player}.png`);
 }
 
 /**
- * @description Returns the icon path for a draw result based on the current theme, using a specific draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+ * @description Returns the icon path for a draw result based on the current theme, using a specific draw icon for the electric-blue theme and a chess piece icon for the magenta-rush theme.
  * @export
- * @return {string} The file path to the draw icon image, which varies based on the current theme, using a draw icon for the gaming theme and a chess piece icon for the code vibes theme.
+ * @return {string} The file path to the draw icon image, which varies based on the current theme, using a draw icon for the electric-blue theme and a chess piece icon for the magenta-rush theme.
  */
 export function getDrawIcon(): string {
   const activeTheme = document.body.dataset.theme;
-  return activeTheme === 'gaming'
-    ? assetPath('/img/00_general/draw_icon_game.png')
-    : assetPath('/img/00_general/draw_icon_code.png');
+  return activeTheme === "electric-blue" ? assetPath("/img/00_general/draw_icon_game.png") : assetPath("/img/00_general/draw_icon_code.png");
 }
