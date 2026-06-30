@@ -2,38 +2,33 @@
 @use "../abstracts/mixins" as m;
 
 .home {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--main-bg-dark);
+  @include m.flex-center(column, center);
   position: relative;
+  background-color: v.$color-bg-light;
+  padding: v.$spacing-l;
 
   &__content {
-    @include m.flex-center();
-  }
-
-  &__subtitle {
-    font-size: v.$font-size-2xl;
-    color: v.$color-text-light;
-    text-align: left;
+    width: 100%;
+    max-width: 42rem;
+    @include m.flex-center(column, center);
+    gap: v.$spacing-xl;
   }
 
   &__title {
-    font-family: v.$font-red-rose;
-    color: v.$color-text-light;
-    margin: 0;
+    width: 100%;
+    background-color: v.$color-light-gray;
+    text-align: center;
+    color: v.$color-text-dark;
+    padding: v.$spacing-l v.$spacing-xl;
+    border-radius: v.$retro-radius;
+    border: v.$retro-border;
+    box-shadow: v.$retro-shadow;
   }
 
   &__actions {
-    margin-top: v.$spacing-3xl;
-    text-align: center;
-  }
-
-  &__controller {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 24rem;
-    height: auto;
+    width: 100%;
+    max-width: 24rem;
+    @include m.flex-center(column, center);
+    gap: v.$spacing-m;
   }
 }
