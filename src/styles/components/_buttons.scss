@@ -1,73 +1,57 @@
 @use "../abstracts/variables" as v;
 
 .btn {
-  font-family: v.$font-red-rose;
-  font-weight: v.$font-weight-600;
+  font-family: v.$font-tanker;
   padding: v.$spacing-m v.$spacing-l;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: v.$spacing-m;
-  width: auto;
-  border: none;
-  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  border: v.$retro-border;
+  border-radius: v.$retro-radius-sm;
+  box-shadow: v.$retro-shadow;
+  cursor: pointer;
+
+  transition:
+    transform 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.2s ease;
 
   &--primary {
-    background-color: var(--btn-primary-bg);
-    color: var(--btn-primary-text);
-  }
-
-  &--small {
-    font-size: v.$font-size-sm;
-    padding: v.$spacing-s v.$spacing-m;
-  }
-
-  &--medium {
-    font-size: v.$font-size-md;
-    padding: v.$spacing-m v.$spacing-l;
+    background-color: var(--btn-primary-bg, #{v.$btn-ui-bg});
+    color: var(--btn-primary-text, #{v.$btn-ui-text});
   }
 
   &--large {
-    font-size: v.$font-size-xl;
-    padding: v.$spacing-m v.$spacing-l;
+    font-size: v.$font-size-2xl;
+    padding: v.$spacing-l v.$spacing-2xl;
+    letter-spacing: v.$letter-spacing-wide;
   }
 
-  &__icon {
-    width: 1.6rem;
+  &__smile {
+    width: 2.5rem;
     height: auto;
-    transform-origin: center;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  &__arrow {
-    width: 1.5rem;
-    height: 1.5rem;
-    display: inline-block;
-    vertical-align: middle;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url("/img/00_general/arrow.png");
-    transition: background-image 0.2s ease-in-out;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &:hover {
-    transform: scale(1.05);
+    background-color: var(--btn-primary-hover-bg, #{v.$btn-ui-hover-bg});
+    transform: translateY(-2px);
+    box-shadow: v.$retro-shadow-active;
 
-    .btn__icon {
-      transform: rotate(-32deg);
-    }
-
-    .btn__arrow {
-      background-image: url("/img/00_general/arrow_bold.png");
+    .btn__smile {
+      transform: translateX(8px) scale(1.15) rotate(12deg);
     }
   }
-}
 
-body[data-theme="gaming"] .btn:hover {
-  transform: none;
-}
+  &:active {
+    transform: translateY(6px);
+    box-shadow: v.$retro-shadow-active;
 
-body[data-theme="gaming"] .btn:hover .btn__icon {
-  transform: none;
+    .btn__smile {
+      transform: translateX(4px) scale(0.85) rotate(-5deg);
+      transition: transform 0.04s ease;
+    }
+  }
 }
