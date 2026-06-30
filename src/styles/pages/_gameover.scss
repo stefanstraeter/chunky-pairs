@@ -29,7 +29,6 @@
     font-size: v.$font-size-2xl;
     color: var(--main-bg-light);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
   }
 
   &__scores {
@@ -37,26 +36,26 @@
   }
 }
 
-body[data-theme="code-vibes"] .gameover {
-  font-family: v.$font-red-rose;
+body[data-theme="magenta-rush"] .gameover {
+  font-family: v.$font-tanker;
 
   .gameover__title {
     color: #4bd5bd;
-    font-family: v.$font-red-rose;
+    font-family: v.$font-tanker;
   }
 }
 
-body[data-theme="gaming"] .gameover {
-  font-family: v.$font-orbitron;
+body[data-theme="electric-blue"] .gameover {
+  font-family: v.$font-tanker;
 
   .gameover__title {
     color: #ed1b76;
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
   }
 
   .gameover__subtitle {
     color: #f4f4f4;
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
     font-weight: v.$font-weight-700;
   }
 
@@ -65,6 +64,6 @@ body[data-theme="gaming"] .gameover {
   }
 
   .score {
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
   }
 }
