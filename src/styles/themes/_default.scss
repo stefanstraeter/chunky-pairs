@@ -2,7 +2,7 @@
 @use "sass:map";
 
 :root {
-  @each $key, $value in map.get(v.$themes, "code-vibes") {
+  @each $key, $value in map.get(v.$themes, "magenta-rush") {
     --#{$key}: #{$value};
   }
 }
