@@ -1,15 +1,7 @@
 @use "../abstracts/variables" as v;
 
 body {
-  background-color: v.$color-bg-dark;
-
-  &[data-theme="code-vibes"] {
-    background-color: v.$color-bg-dark;
-  }
-
-  &[data-theme="gaming"] {
-    background-color: v.theme-val("gaming", "main-bg-dark");
-  }
+  position: relative;
 }
 
 #app {
@@ -24,3 +16,39 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/*
+body {
+  font-family: v.$font-tanker;
+  background-color: #7141f5;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    background-color: #582cd1;
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+
+    z-index: -1;
+  }
+}
+#app {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: transparent;
+}
+
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+*/
