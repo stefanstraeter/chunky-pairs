@@ -73,9 +73,9 @@
 }
 
 // ── Font family per theme ─────────────────────
-body[data-theme="code-vibes"] {
+body[data-theme="magenta-rush"] {
   .game__status {
-    font-family: v.$font-red-rose;
+    font-family: v.$font-tanker;
 
     #btn-exit-game {
       background-color: #425651;
@@ -94,9 +94,9 @@ body[data-theme="code-vibes"] {
   }
 }
 
-body[data-theme="gaming"] {
+body[data-theme="electric-blue"] {
   .game__status {
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
 
     #btn-exit-game {
       --exit-accent: #e71d4f;
