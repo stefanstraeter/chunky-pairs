@@ -7,13 +7,13 @@
 
 // NEU: Macht das Styling für die zwei verschiedenen Themes extrem sauber:
 @mixin themed() {
-  [data-theme="code-vibes"] & {
+  [data-theme="magenta-rush"] & {
     @content;
   }
 }
 
-@mixin gaming-themed() {
-  [data-theme="gaming"] & {
+@mixin electric-blue-themed() {
+  [data-theme="electric-blue"] & {
     @content;
   }
 }
