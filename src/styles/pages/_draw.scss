@@ -30,7 +30,6 @@
     font-size: clamp(2.4rem, 8vw, 4.8rem);
     font-weight: v.$font-weight-700;
     line-height: 1;
-    letter-spacing: 0.03em;
     text-transform: uppercase;
   }
 
@@ -47,8 +46,8 @@
   }
 }
 
-body[data-theme="code-vibes"] .draw {
-  font-family: v.$font-red-rose;
+body[data-theme="magenta-rush"] .draw {
+  font-family: v.$font-tanker;
 
   .draw__back-btn {
     background-color: #425651;
@@ -63,8 +62,8 @@ body[data-theme="code-vibes"] .draw {
   }
 }
 
-body[data-theme="gaming"] .draw {
-  font-family: v.$font-orbitron;
+body[data-theme="electric-blue"] .draw {
+  font-family: v.$font-tanker;
 
   .draw__name {
     color: #ed1b76;
