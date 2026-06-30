@@ -1,115 +1,14 @@
 @use "../abstracts/variables" as v;
 
 /* ==========================================================================
-   ORBITRON, ALMARAI & RED ROSE FONTS
+  TANKER FONT (Display Font für Headlines)
    ========================================================================== */
-
 @font-face {
-  font-display: swap;
-  font-family: "Orbitron";
-  font-style: normal;
+  font-family: "Tanker";
+  src: url("/fonts/tanker-regular/tanker-regular.woff2") format("woff2");
   font-weight: 400;
-  src: url("/fonts/orbitron/orbitron-v35-latin-regular.woff2") format("woff2");
-}
-@font-face {
   font-display: swap;
-  font-family: "Orbitron";
   font-style: normal;
-  font-weight: 500;
-  src: url("/fonts/orbitron/orbitron-v35-latin-500.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Orbitron";
-  font-style: normal;
-  font-weight: 600;
-  src: url("/fonts/orbitron/orbitron-v35-latin-600.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Orbitron";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/orbitron/orbitron-v35-latin-700.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Orbitron";
-  font-style: normal;
-  font-weight: 800;
-  src: url("/fonts/orbitron/orbitron-v35-latin-800.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Orbitron";
-  font-style: normal;
-  font-weight: 900;
-  src: url("/fonts/orbitron/orbitron-v35-latin-900.woff2") format("woff2");
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Almarai";
-  font-style: normal;
-  font-weight: 300;
-  src: url("/fonts/almarai/almarai-v19-latin-300.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Almarai";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/almarai/almarai-v19-latin-regular.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Almarai";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/almarai/almarai-v19-latin-700.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Almarai";
-  font-style: normal;
-  font-weight: 800;
-  src: url("/fonts/almarai/almarai-v19-latin-800.woff2") format("woff2");
-}
-
-@font-face {
-  font-display: swap;
-  font-family: "Red Rose";
-  font-style: normal;
-  font-weight: 300;
-  src: url("/fonts/red-rose/red-rose-v25-latin-300.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Red Rose";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/red-rose/red-rose-v25-latin-regular.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Red Rose";
-  font-style: normal;
-  font-weight: 500;
-  src: url("/fonts/red-rose/red-rose-v25-latin-500.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Red Rose";
-  font-style: normal;
-  font-weight: 600;
-  src: url("/fonts/red-rose/red-rose-v25-latin-600.woff2") format("woff2");
-}
-@font-face {
-  font-display: swap;
-  font-family: "Red Rose";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/red-rose/red-rose-v25-latin-700.woff2") format("woff2");
 }
 
 /* ==========================================================================
@@ -117,29 +16,39 @@
    ========================================================================== */
 
 body {
-  font-family: v.$font-almarai;
+  font-family: v.$font-tanker;
   font-size: v.$font-size-md;
   color: v.$color-text-dark;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: v.$font-tanker;
+  text-transform: uppercase;
+  letter-spacing: v.$letter-spacing-wide;
+  color: inherit;
+}
+
 h1 {
-  font-size: v.$font-size-7xl;
+  font-size: clamp(2.25rem, 8vw, 6.5rem);
 }
 
 h2 {
-  font-size: v.$font-size-3xl;
+  font-size: clamp(1.75rem, 4vw, 3rem);
 }
+
 h3 {
-  font-size: v.$font-size-2xl;
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
-h4 {
-  font-size: v.$font-size-xl;
-}
-h5 {
-  font-size: v.$font-size-xl;
-}
+
+h4,
+h5,
 h6 {
-  font-size: v.$font-size-lg;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
 }
 
 p {
