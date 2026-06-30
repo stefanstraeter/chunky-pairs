@@ -7,12 +7,12 @@ import type { Theme } from '../types';
   ========================================================================== */
 
 export const themePreviews = {
-  'code-vibes': assetPath('/img/01_themes/vibes_theme/vibe_theme.png'),
-  'gaming': assetPath('/img/01_themes/game_theme/game_theme.png'),
+  'magenta-rush': assetPath('/img/01_themes/vibes_theme/vibe_theme.png'),
+  'electric-blue': assetPath('/img/01_themes/game_theme/game_theme.png'),
 };
 
 export function getActiveTheme(): Theme {
-  return document.body.dataset.theme === 'gaming' ? 'gaming' : 'code-vibes';
+  return document.body.dataset.theme === 'electric-blue' ? 'electric-blue' : 'magenta-rush';
 }
 
 /* ==========================================================================
@@ -25,7 +25,7 @@ export function getActiveTheme(): Theme {
  * @param {Theme} theme - The currently active theme, which determines the button labels to be applied.
  */
 export function applyEndScreenButtonLabels(theme: Theme): void {
-  const label = theme === 'gaming' ? 'home' : 'Back to start';
+  const label = theme === 'electric-blue' ? 'home' : 'Back to start';
   const winnerButton = document.getElementById('btn-back-to-start-winner');
   const drawButton = document.getElementById('btn-back-to-start-draw');
 
@@ -42,7 +42,7 @@ export function applyEndScreenThemeAssets(theme: Theme): void {
   const drawIcon = document.querySelector<HTMLImageElement>('.draw__icon');
   if (!drawIcon) return;
 
-  drawIcon.src = theme === 'gaming'
+  drawIcon.src = theme === 'electric-blue'
     ? assetPath('/img/00_general/draw_icon_game.png')
     : assetPath('/img/00_general/draw_icon_code.png');
 }

@@ -1,7 +1,6 @@
+import { assetPath } from "../assets";
 
-import { assetPath } from '../assets';
-
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE HOME SCREEN
     ========================================================================== */
 /**
@@ -11,25 +10,21 @@ import { assetPath } from '../assets';
  */
 export function createHomeScreenTemplate(): string {
   return `
-    <section id="screen-home" class="screen home">
+  <section id="screen-home" class="screen home">
       <div class="home__content">
-        <span class="home__subtitle">It's time to play</span>
-        <h1 class="home__title">Ready to play?</h1>
+        <h1 class="home__title">Chunky Pairs</h1>
 
         <div class="home__actions">
           <button id="btnPlay" class="btn btn--primary btn--large">
-            <img src="${assetPath('/img/00_general/stadia_controller.png')}" class="btn__icon" alt="Stadia Controller" />
-            Play
-            <span class="btn__arrow"></span>
+            READY? PLAY! <img src="${assetPath("/img/00_general/player-vs-player.svg")}" class="btn__smile" />
           </button>
         </div>
       </div>
-      <img src="${assetPath('/img/00_general/stadia_controller_yellow.png')}" class="home__controller" alt="Yellow Stadia Controller" />
     </section>
   `;
 }
 
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE SETTINGS SCREEN
     ========================================================================== */
 
@@ -48,24 +43,24 @@ export function createSettingsScreenTemplate(): string {
         <div class="settings__left">
           <fieldset class="settings__fieldset">
             <legend class="settings__legend">
-              <img src="${assetPath('/img/00_general/palette.svg')}" alt="" />
+              <img src="${assetPath("/img/00_general/palette.svg")}" alt="" />
               Game themes
             </legend>
             <label class="settings__label">
-              <input type="radio" name="theme" value="code-vibes" />
-              Code vibes
+              <input type="radio" name="theme" value="magenta-rush" />
+              Magenta rush
               <span class="label__indicator"></span>
             </label>
             <label class="settings__label">
-              <input type="radio" name="theme" value="gaming" />
-              Gaming
+              <input type="radio" name="theme" value="electric-blue" />
+              Electric blue
               <span class="label__indicator"></span>
             </label>
           </fieldset>
 
           <fieldset class="settings__fieldset">
             <legend class="settings__legend">
-              <img src="${assetPath('/img/00_general/chess_pawn.svg')}" alt="" />
+              <img src="${assetPath("/img/00_general/chess_pawn.svg")}" alt="" />
               Choose player
             </legend>
             <label class="settings__label">
@@ -82,7 +77,7 @@ export function createSettingsScreenTemplate(): string {
 
           <fieldset class="settings__fieldset">
             <legend class="settings__legend">
-              <img src="${assetPath('/img/00_general/style.svg')}" alt="" />
+              <img src="${assetPath("/img/00_general/style.svg")}" alt="" />
               Board size
             </legend>
             <label class="settings__label">
@@ -107,7 +102,7 @@ export function createSettingsScreenTemplate(): string {
           <img
             id="theme-preview"
             class="settings__preview-img"
-            src="${assetPath('/img/01_themes/vibes_theme/vibe_theme.png')}"
+            src="${assetPath("/img/01_themes/vibes_theme/vibe_theme.png")}"
             alt="Theme preview"
           />
 
@@ -118,7 +113,7 @@ export function createSettingsScreenTemplate(): string {
             <span class="settings__bar-divider">/</span>
             <span id="selected-size" class="settings__bar-item">Board size</span>
             <button id="btn-start" class="btn btn--primary settings__bar-btn" disabled>
-              <img src="${assetPath('/img/00_general/smart_display.svg')}" class="btn__icon" alt="" />
+              <img src="${assetPath("/img/00_general/smart_display.svg")}" class="btn__icon" alt="" />
               Start
             </button>
           </div>
@@ -128,7 +123,7 @@ export function createSettingsScreenTemplate(): string {
   `;
 }
 
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE GAME SCREEN
     ========================================================================== */
 
@@ -148,7 +143,7 @@ export function createGameScreenTemplate(): string {
   `;
 }
 
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE GAME OVER SCREEN
     ========================================================================== */
 
@@ -165,11 +160,11 @@ export function createGameOverScreenTemplate(): string {
         <p class="gameover__subtitle">Final score</p>
         <div class="gameover__scores status__scores">
           <span class="score score--blue">
-            <img id="gameover-blue-icon" class="score__icon" src="${assetPath('/img/00_general/label_blue.svg')}" alt="" />
+            <img id="gameover-blue-icon" class="score__icon" src="${assetPath("/img/00_general/label_blue.svg")}" alt="" />
             <span id="gameover-blue-label">Blue </span><span id="gameover-blue-score" class="score__value">0</span>
           </span>
           <span class="score score--orange">
-            <img id="gameover-orange-icon" class="score__icon" src="${assetPath('/img/00_general/label_orange.svg')}" alt="" />
+            <img id="gameover-orange-icon" class="score__icon" src="${assetPath("/img/00_general/label_orange.svg")}" alt="" />
             <span id="gameover-orange-label">Orange </span><span id="gameover-orange-score" class="score__value">0</span>
           </span>
         </div>
@@ -178,7 +173,7 @@ export function createGameOverScreenTemplate(): string {
   `;
 }
 
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE WINNER SCREEN
     ========================================================================== */
 
@@ -191,7 +186,7 @@ export function createVibesWinnerTemplate(): string {
   return `
     <section id="screen-winner" class="screen winner slide-in-top">
       <div class="winner__content">
-        <img class="winner__header-icon" src="${assetPath('/img/00_general/confetti.png')}" alt="" />
+        <img class="winner__header-icon" src="${assetPath("/img/00_general/confetti.png")}" alt="" />
         <h2 class="winner__title">The winner is</h2>
         <div class="winner__winner" data-winner="">
           <p id="winner-name" class="winner__winner-name"></p>
@@ -204,13 +199,13 @@ export function createVibesWinnerTemplate(): string {
 }
 
 /**
- * @description Creates a winner screen template with a gaming theme for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen. The design of this template is tailored to fit the gaming theme, featuring a more dynamic layout and styling compared to the code vibes theme.
+ * @description Creates a winner screen template with a electric-blue theme for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen. The design of this template is tailored to fit the electric-blue theme, featuring a more dynamic layout and styling compared to the magenta-rush theme.
  * @export
- * @return {string} The HTML string representing the gaming-themed winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner winner--gaming", containing a div for the winner content, including the title, winner information, and a back button. The layout and styling of this template are designed to evoke a gaming atmosphere, with bold typography and a more energetic presentation.
+ * @return {string} The HTML string representing the electric-blue-themed winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner winner--electric-blue", containing a div for the winner content, including the title, winner information, and a back button. The layout and styling of this template are designed to evoke a electric-blue atmosphere, with bold typography and a more energetic presentation.
  */
-export function createGamingWinnerTemplate(): string {
+export function createElectricBlueWinnerTemplate(): string {
   return `
-    <section id="screen-winner" class="screen winner winner--gaming slide-in-bottom">
+    <section id="screen-winner" class="screen winner winner--electric-blue slide-in-bottom">
       <div class="winner__content">
         <h2 class="winner__title">STAGE CLEAR!</h2>
         <div class="winner__winner" data-winner="">
@@ -223,7 +218,7 @@ export function createGamingWinnerTemplate(): string {
   `;
 }
 
-  /* ==========================================================================
+/* ==========================================================================
     TEMPLATE DRAW SCREEN
     ========================================================================== */
 /**
@@ -237,7 +232,7 @@ export function createDrawScreenTemplate(): string {
       <div class="draw__content">
         <h2 class="draw__title">It's a</h2>
         <p class="draw__name">DRAW</p>
-        <img class="draw__icon" src="${assetPath('/img/00_general/draw_icon_code.png')}" alt="Draw" />
+        <img class="draw__icon" src="${assetPath("/img/00_general/draw_icon_code.png")}" alt="Draw" />
         <button id="btn-back-to-start-draw" class="btn btn--exit draw__back-btn" type="button">Back to start</button>
       </div>
     </section>

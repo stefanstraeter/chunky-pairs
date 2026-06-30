@@ -1,18 +1,16 @@
-
-import { gameState } from '../state';
-import { initGame } from '../game/game';
-import type { Theme } from '../types';
-import { getActiveTheme, syncEndScreenTheme, themePreviews } from './theme'; 
+import { gameState } from "../state";
+import { initGame } from "../game/game";
+import type { Theme } from "../types";
+import { getActiveTheme, syncEndScreenTheme, themePreviews } from "./theme";
 import {
   createHomeScreenTemplate,
   createDrawScreenTemplate,
   createGameOverScreenTemplate,
   createGameScreenTemplate,
   createSettingsScreenTemplate,
-  createVibesWinnerTemplate, 
-  createGamingWinnerTemplate,
-} from '../templates/screen-templates';
-
+  createVibesWinnerTemplate,
+  createElectricBlueWinnerTemplate,
+} from "../templates/screen-templates";
 
 /* ==========================================================================
    CORE RENDERING FUNCTION
@@ -23,7 +21,7 @@ import {
  * @param {string} htmlContent - The HTML string to be rendered on the screen.
  */
 export function renderScreen(htmlContent: string): void {
-  const appRoot = document.getElementById('app');
+  const appRoot = document.getElementById("app");
   if (appRoot) {
     appRoot.innerHTML = htmlContent;
   }
@@ -56,12 +54,10 @@ export function showSettingsScreen(): void {
  * @export
  */
 export function showWinnerScreen(): void {
-  const winnerHtml = gameState.theme === 'gaming' 
-    ? createGamingWinnerTemplate() 
-    : createVibesWinnerTemplate();
+  const winnerHtml = gameState.theme === "electric-blue" ? createElectricBlueWinnerTemplate() : createVibesWinnerTemplate();
 
   renderScreen(winnerHtml);
-  syncEndScreenTheme(getActiveTheme()); 
+  syncEndScreenTheme(getActiveTheme());
   setupEndScreenListeners();
 }
 
@@ -71,7 +67,7 @@ export function showWinnerScreen(): void {
  */
 export function showDrawScreen(): void {
   renderScreen(createDrawScreenTemplate());
-  syncEndScreenTheme(getActiveTheme()); 
+  syncEndScreenTheme(getActiveTheme());
   setupEndScreenListeners();
 }
 
@@ -83,7 +79,7 @@ export function showDrawScreen(): void {
  * @description Sets up event listeners for the home screen.
  */
 function setupHomeListeners(): void {
-  document.getElementById('btnPlay')?.addEventListener('click', () => {
+  document.getElementById("btnPlay")?.addEventListener("click", () => {
     showSettingsScreen();
   });
 }
@@ -92,9 +88,9 @@ function setupHomeListeners(): void {
  * @description Sets up event listeners for the end screen.
  */
 function setupEndScreenListeners(): void {
-  const btn = document.getElementById('btn-back-to-start-winner') || document.getElementById('btn-back-to-start-draw');
-  btn?.addEventListener('click', () => {
-    document.body.dataset.theme = 'code-vibes';
+  const btn = document.getElementById("btn-back-to-start-winner") || document.getElementById("btn-back-to-start-draw");
+  btn?.addEventListener("click", () => {
+    document.body.dataset.theme = "magenta-rush";
     showHomeScreen();
   });
 }
@@ -118,7 +114,7 @@ function setupSettingsListeners(): void {
  * @description Enables the start button only when all required settings (theme, player, board size) are selected.
  */
 function checkStartEnabled(): void {
-  const btnStart = document.getElementById('btn-start') as HTMLButtonElement | null;
+  const btnStart = document.getElementById("btn-start") as HTMLButtonElement | null;
   const theme = document.querySelector('input[name="theme"]:checked');
   const player = document.querySelector('input[name="player"]:checked');
   const size = document.querySelector('input[name="board-size"]:checked');
@@ -133,27 +129,27 @@ function checkStartEnabled(): void {
  * @param {string} radioValue - The value of the selected theme radio button, used to determine which preview image to display.
  */
 function updateThemePreview(radioValue: string): void {
-  const preview = document.getElementById('theme-preview') as HTMLImageElement | null;
-  const label = document.getElementById('selected-theme');
+  const preview = document.getElementById("theme-preview") as HTMLImageElement | null;
+  const label = document.getElementById("selected-theme");
   const activeRadio = document.querySelector('input[name="theme"]:checked');
 
   if (preview) {
     const key = radioValue as keyof typeof themePreviews;
-    preview.src = themePreviews[key] ?? themePreviews['code-vibes'];
+    preview.src = themePreviews[key] ?? themePreviews["magenta-rush"];
   }
   if (label) {
-    label.textContent = activeRadio?.closest('label')?.textContent?.trim() ?? 'Game theme';
+    label.textContent = activeRadio?.closest("label")?.textContent?.trim() ?? "Game theme";
   }
 }
 
 /**
- * @description Sets up event listeners for theme radio buttons to update the theme preview and synchronize the end screen theme when a new theme is selected. 
+ * @description Sets up event listeners for theme radio buttons to update the theme preview and synchronize the end screen theme when a new theme is selected.
  */
 function setupThemeRadios(): void {
-  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
-    radio.addEventListener('change', () => {
+  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
       updateThemePreview(radio.value);
-      const nextTheme: Theme = radio.value === 'gaming' ? 'gaming' : 'code-vibes';
+      const nextTheme: Theme = radio.value === "electric-blue" ? "electric-blue" : "magenta-rush";
       syncEndScreenTheme(nextTheme);
       checkStartEnabled();
     });
@@ -164,13 +160,13 @@ function setupThemeRadios(): void {
  * @description Sets up hover event listeners on theme radio button labels to temporarily update the theme preview when hovering over different theme options.
  */
 function setupThemeHoverListeners(): void {
-  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach(radio => {
-    radio.closest('label')?.addEventListener('mouseenter', () => {
+  document.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((radio) => {
+    radio.closest("label")?.addEventListener("mouseenter", () => {
       updateThemePreview(radio.value);
     });
-    radio.closest('label')?.addEventListener('mouseleave', () => {
+    radio.closest("label")?.addEventListener("mouseleave", () => {
       const activeRadio = document.querySelector<HTMLInputElement>('input[name="theme"]:checked');
-      updateThemePreview(activeRadio?.value ?? 'code-vibes');
+      updateThemePreview(activeRadio?.value ?? "magenta-rush");
     });
   });
 }
@@ -179,12 +175,12 @@ function setupThemeHoverListeners(): void {
  * @description Sets up event listeners for player radio buttons to update the selected player label and check if the start button should be enabled when a player option is selected.
  */
 function setupPlayerRadios(): void {
-  document.querySelectorAll<HTMLInputElement>('input[name="player"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      const label = document.getElementById('selected-player');
-      const text = radio.closest('label')?.textContent?.trim();
+  document.querySelectorAll<HTMLInputElement>('input[name="player"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const label = document.getElementById("selected-player");
+      const text = radio.closest("label")?.textContent?.trim();
       if (label) {
-        label.textContent = text ?? 'Player';
+        label.textContent = text ?? "Player";
       }
       checkStartEnabled();
     });
@@ -195,12 +191,12 @@ function setupPlayerRadios(): void {
  * @description Sets up event listeners for board size radio buttons to update the selected board size label and check if the start button should be enabled when a board size option is selected.
  */
 function setupBoardSizeRadios(): void {
-  document.querySelectorAll<HTMLInputElement>('input[name="board-size"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      const label = document.getElementById('selected-size');
-      const text = radio.closest('label')?.textContent?.trim();
+  document.querySelectorAll<HTMLInputElement>('input[name="board-size"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const label = document.getElementById("selected-size");
+      const text = radio.closest("label")?.textContent?.trim();
       if (label) {
-        label.textContent = text ?? 'Board size';
+        label.textContent = text ?? "Board size";
       }
       checkStartEnabled();
     });
@@ -215,9 +211,9 @@ function saveSettingsToState(): void {
   const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked')?.value;
   const size = document.querySelector<HTMLInputElement>('input[name="board-size"]:checked')?.value;
 
-  gameState.theme = (theme ?? 'code-vibes') as Theme;
-  gameState.player = (player ?? 'blue') as 'blue' | 'orange';
-  gameState.boardSize = parseInt(size ?? '16');
+  gameState.theme = (theme ?? "magenta-rush") as Theme;
+  gameState.player = (player ?? "blue") as "blue" | "orange";
+  gameState.boardSize = parseInt(size ?? "16");
   document.body.dataset.theme = gameState.theme;
 }
 
@@ -225,10 +221,9 @@ function saveSettingsToState(): void {
  * @description Sets up the event listener for the start button on the settings screen to save the selected settings to the game state and navigate to the game screen when clicked.
  */
 function setupStartButton(): void {
-  document.getElementById('btn-start')?.addEventListener('click', () => {
+  document.getElementById("btn-start")?.addEventListener("click", () => {
     saveSettingsToState();
     renderScreen(createGameScreenTemplate());
     initGame();
   });
 }
-
