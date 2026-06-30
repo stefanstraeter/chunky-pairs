@@ -69,12 +69,12 @@
   }
 }
 
-body[data-theme="code-vibes"] .winner {
-  font-family: v.$font-red-rose;
+body[data-theme="magenta-rush"] .winner {
+  font-family: v.$font-tanker;
 
   .winner__title {
     color: #f4f4f4;
-    font-family: v.$font-red-rose;
+    font-family: v.$font-tanker;
   }
 
   .winner__winner-name[data-winner="blue"],
@@ -105,8 +105,8 @@ body[data-theme="code-vibes"] .winner {
   }
 }
 
-body[data-theme="gaming"] .winner {
-  font-family: v.$font-orbitron;
+body[data-theme="electric-blue"] .winner {
+  font-family: v.$font-tanker;
 
   .winner__header-icon {
     display: none;
@@ -114,7 +114,7 @@ body[data-theme="gaming"] .winner {
 
   .winner__title {
     color: #f4f4f4;
-    font-family: v.$font-orbitron;
+    font-family: v.$font-tanker;
   }
 
   .winner__winner {
@@ -186,7 +186,7 @@ body[data-theme="gaming"] .winner {
     animation: slideInFromTop 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   }
 
-  &--gaming {
+  &--electric-blue {
     &.slide-in-bottom {
       animation: slideInFromBottom 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
