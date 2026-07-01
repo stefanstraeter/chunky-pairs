@@ -16,7 +16,7 @@ export function createHomeScreenTemplate(): string {
 
         <div class="home__actions">
           <button id="btnPlay" class="btn btn--primary btn--large">
-            READY? PLAY! <img src="${assetPath("/img/00_general/player-vs-player.svg")}" class="btn__smile" />
+            Smash me <img src="${assetPath("/img/00_general/player-vs-player.svg")}" class="btn__smile" />
           </button>
         </div>
       </div>
@@ -36,88 +36,69 @@ export function createHomeScreenTemplate(): string {
 export function createSettingsScreenTemplate(): string {
   return `
     <section id="screen-settings" class="screen settings">
-      <h2 class="settings__title">Settings</h2>
-      <div class="settings__divider"></div>
+      <div class="settings__card">
+        
+        <h2 class="settings__title">Setup your Game</h2>
+        
+        <img
+          id="theme-preview"
+          class="settings__preview-img"
+          src="${assetPath("/img/01_themes/vibes_theme/vibe_theme.png")}"
+          alt="Theme preview"
+        />
 
-      <div class="settings__content">
-        <div class="settings__left">
+        <div class="settings__form">
           <fieldset class="settings__fieldset">
-            <legend class="settings__legend">
-              <img src="${assetPath("/img/00_general/palette.svg")}" alt="" />
-              Game themes
-            </legend>
-            <label class="settings__label">
-              <input type="radio" name="theme" value="magenta-rush" />
-              Magenta rush
-              <span class="label__indicator"></span>
-            </label>
-            <label class="settings__label">
-              <input type="radio" name="theme" value="electric-blue" />
-              Electric blue
-              <span class="label__indicator"></span>
-            </label>
+            <legend class="settings__legend">Select Vibe</legend>
+            <div class="settings__grid">
+              <label class="settings__tile">
+                <input type="radio" name="theme" value="magenta-rush" />
+                <span>Magenta Rush</span>
+              </label>
+              <label class="settings__tile">
+                <input type="radio" name="theme" value="electric-blue" />
+                <span>Electric Blue</span>
+              </label>
+            </div>
           </fieldset>
 
           <fieldset class="settings__fieldset">
-            <legend class="settings__legend">
-              <img src="${assetPath("/img/00_general/chess_pawn.svg")}" alt="" />
-              Choose player
-            </legend>
-            <label class="settings__label">
-              <input type="radio" name="player" value="blue" />
-              Blue
-              <span class="label__indicator"></span>
-            </label>
-            <label class="settings__label">
-              <input type="radio" name="player" value="orange" />
-              Orange
-              <span class="label__indicator"></span>
-            </label>
+            <legend class="settings__legend">Pick Your Hero</legend>
+            <div class="settings__grid">
+              <label class="settings__tile">
+                <input type="radio" name="player" value="blue" />
+                <span>Blue</span>
+              </label>
+              <label class="settings__tile">
+                <input type="radio" name="player" value="orange" />
+                <span>Orange</span>
+              </label>
+            </div>
           </fieldset>
 
           <fieldset class="settings__fieldset">
-            <legend class="settings__legend">
-              <img src="${assetPath("/img/00_general/style.svg")}" alt="" />
-              Board size
-            </legend>
-            <label class="settings__label">
-              <input type="radio" name="board-size" value="16" />
-              16 cards
-              <span class="label__indicator"></span>
-            </label>
-            <label class="settings__label">
-              <input type="radio" name="board-size" value="24" />
-              24 cards
-              <span class="label__indicator"></span>
-            </label>
-            <label class="settings__label">
-              <input type="radio" name="board-size" value="36" />
-              36 cards
-              <span class="label__indicator"></span>
-            </label>
+            <legend class="settings__legend">Difficulty</legend>
+            <div class="settings__grid settings__grid--3col">
+              <label class="settings__tile">
+                <input type="radio" name="board-size" value="16" />
+                <span>16 Cards</span>
+              </label>
+              <label class="settings__tile">
+                <input type="radio" name="board-size" value="24" />
+                <span>24 Cards</span>
+              </label>
+              <label class="settings__tile">
+                <input type="radio" name="board-size" value="36" />
+                <span>36 Cards</span>
+              </label>
+            </div>
           </fieldset>
         </div>
 
-        <div class="settings__right">
-          <img
-            id="theme-preview"
-            class="settings__preview-img"
-            src="${assetPath("/img/01_themes/vibes_theme/vibe_theme.png")}"
-            alt="Theme preview"
-          />
+        <button id="btn-start" class="btn btn--primary btn--large settings__start-btn" disabled>
+          Let's Play!
+        </button>
 
-          <div class="settings__bar">
-            <span id="selected-theme" class="settings__bar-item">Game theme</span>
-            <span class="settings__bar-divider">/</span>
-            <span id="selected-player" class="settings__bar-item">Player</span>
-            <span class="settings__bar-divider">/</span>
-            <span id="selected-size" class="settings__bar-item">Board size</span>
-            <button id="btn-start" class="btn btn--primary settings__bar-btn" disabled>
-              <img src="${assetPath("/img/00_general/smart_display.svg")}" class="btn__icon" alt="" />
-              Start
-            </button>
-          </div>
-        </div>
       </div>
     </section>
   `;
