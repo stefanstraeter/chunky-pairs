@@ -17,23 +17,25 @@ $global-config: (
     "border-thick": 0.3125rem solid #16151d,
     "border-radius": 1.5rem,
     "border-radius-sm": 0.75rem,
-    "shadow": 0rem 0.5rem 0rem #16151d,
+    "shadow-lg": 0rem 0.5rem 0rem #16151d,
+    "shadow-sm": 0rem 0.25rem 0rem #16151d,
     "shadow-active": 0rem 0.6rem 0rem #16151d,
   ),
 
   "colors": (
-    "bg-dark": #1a1235,
-    "bg-light": #7141f5,
+    "bg-violet": #7141f5,
     "bg-cream": #e7e5e5,
     "text-dark": #16151d,
     "text-light": #f1f1f1,
     "accent": #fd6687,
     "light-gray": #ffffff,
   ),
+
   "button-ui": (
-    "bg": #fd6687,
+    "primary": #e61f4d,
+    "secondary": #ffce67,
     "text": #ffffff,
-    "hover-bg": #ff8fa7,
+    "hover-bg": #fd7526,
     "hover-text": #ffffff,
     "disabled-bg": #582cd1,
     "disabled-text": #a0a0a0,
@@ -132,7 +134,7 @@ $themes: (
 }
 
 /* ============================================================
-    QUICK ACCESS VARIABLES (Bleiben unberührt -> KEIN ABSTURZ)
+    QUICK ACCESS FOR STATIC VARIABLES
    ============================================================ */
 
 $font-tanker: config("fonts", "tanker");
@@ -141,11 +143,11 @@ $retro-border: config("retro", "border");
 $retro-border-thick: config("retro", "border-thick");
 $retro-radius: config("retro", "border-radius");
 $retro-radius-sm: config("retro", "border-radius-sm");
-$retro-shadow: config("retro", "shadow");
+$retro-shadow-lg: config("retro", "shadow-lg");
+$retro-shadow-sm: config("retro", "shadow-sm");
 $retro-shadow-active: config("retro", "shadow-active");
 
-$color-bg-dark: config("colors", "bg-dark");
-$color-bg-light: config("colors", "bg-light");
+$color-bg-violet: config("colors", "bg-violet");
 $color-bg-cream: config("colors", "bg-cream");
 
 $color-text-dark: config("colors", "text-dark");
@@ -153,7 +155,8 @@ $color-text-light: config("colors", "text-light");
 $color-accent: config("colors", "accent");
 $color-light-gray: config("colors", "light-gray");
 
-$btn-ui-bg: config("button-ui", "bg");
+$btn-ui-primary: config("button-ui", "primary");
+$btn-ui-secondary: config("button-ui", "secondary");
 $btn-ui-text: config("button-ui", "text");
 $btn-ui-hover-bg: config("button-ui", "hover-bg");
 $btn-ui-hover-text: config("button-ui", "hover-text");
