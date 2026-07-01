@@ -7,7 +7,7 @@
   @include m.flex-center(row, center);
   gap: v.$spacing-m;
   width: 100%;
-  border: v.$retro-border;
+  border: v.$retro-border-thin;
   border-radius: v.$retro-radius-sm;
   box-shadow: v.$retro-shadow-lg;
   transition:
@@ -25,10 +25,22 @@
     color: v.$color-text-dark;
   }
 
+  &--outline {
+    background-color: transparent;
+    color: v.$btn-ui-text;
+  }
+
   &--large {
     font-size: v.$font-size-2xl;
     padding: v.$spacing-m v.$spacing-l;
     letter-spacing: v.$letter-spacing-wide;
+  }
+
+  &--small {
+    font-size: v.$font-size-md;
+    padding: v.$spacing-s v.$spacing-m;
+    min-width: 8rem;
+    width: auto;
   }
 
   &__smile {
