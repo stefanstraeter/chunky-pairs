@@ -5,7 +5,6 @@
   justify-content: $justify;
 }
 
-// NEU: Macht das Styling für die zwei verschiedenen Themes extrem sauber:
 @mixin themed() {
   [data-theme="magenta-rush"] & {
     @content;
