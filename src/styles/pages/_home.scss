@@ -4,8 +4,7 @@
 .home {
   @include m.flex-center(column, center);
   position: relative;
-  background-color: v.$color-bg-light;
-  padding: v.$spacing-l;
+  padding: v.$spacing-m;
 
   &__content {
     width: 100%;
@@ -22,7 +21,7 @@
     padding: v.$spacing-l v.$spacing-xl;
     border-radius: v.$retro-radius;
     border: v.$retro-border;
-    box-shadow: v.$retro-shadow;
+    box-shadow: v.$retro-shadow-lg;
   }
 
   &__actions {
