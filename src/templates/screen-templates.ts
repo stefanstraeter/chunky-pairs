@@ -67,7 +67,7 @@ export function createMatchSetupScreenTemplate(): string {
             <div class="match-setup__grid">
               <label class="match-setup__tile">
                 <input type="radio" name="player" value="blue" />
-                <span>Blue</span>
+                <span>Red</span>
               </label>
               <label class="match-setup__tile">
                 <input type="radio" name="player" value="orange" />
@@ -108,17 +108,35 @@ export function createMatchSetupScreenTemplate(): string {
     TEMPLATE GAME SCREEN
     ========================================================================== */
 
-/**
- * @description Creates game screen markup for lazy mounting, which includes a header for displaying game information and a board area where the memory grid will be rendered.
- * @export
- * @return {string} The HTML string representing the game screen template, which consists of a section with an id of "screen-game" and a class of "screen game", containing a header for game information and a div for the memory grid.
- */
 export function createGameScreenTemplate(): string {
   return `
     <section id="screen-game" class="screen game">
-      <header class="game__header"></header>
-      <div class="game__board">
-        <div id="memory-grid" class="game-board__grid"></div>
+      <header id="game-header" class="game__header"></header>
+      <div class="game__main-layout">
+
+        <div class="player-card player-card--1">
+          <img class="player-card__avatar" src="${assetPath("img/00_general/player-one.svg")}" alt="Player 1 Avatar" />
+          <span class="player-card__label">PLAYER 1</span>
+          <span id="score-player-1" class="player-card__score">0</span>
+        </div>
+
+        <div class="game__board">
+          <div id="memory-grid" class="game-board__grid"></div>
+          
+          <div id="turn-timer" class="turn-timer">
+            <img id="turn-timer-bg" class="turn-timer__bg" src="${assetPath("img/00_general/turn-background-red.svg")}" alt="">
+            <div class="turn-timer__content">
+              <span id="turn-timer-label" class="turn-timer__player">PLAYER 1'S TURN</span>
+              <span id="turn-timer-countdown" class="turn-timer__time">30s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-card player-card--2">
+          <img class="player-card__avatar" src="${assetPath("img/00_general/player-two.svg")}" alt="Player 2 Avatar" />
+          <span class="player-card__label">PLAYER 2</span>
+          <span id="score-player-2" class="player-card__score">0</span>
+        </div>
       </div>
     </section>
   `;
