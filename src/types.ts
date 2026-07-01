@@ -2,11 +2,11 @@
   TYPES
   ========================================================================== */
 
-export type Theme = 'magenta-rush' | 'electric-blue';
+export type Theme = "magenta-rush" | "electric-blue";
 
-export type Player = 'blue' | 'orange';
+export type Player = "blue" | "orange";
 
-export type Winner = 'blue' | 'orange' | 'draw';
+export type Winner = "blue" | "orange" | "draw";
 
 export type HeaderTemplateData = {
   showColorLabels: boolean;
@@ -30,7 +30,6 @@ export type ExitModalElements = {
   ========================================================================== */
 
 export interface GameState {
-  // Settings (set before game starts)
   theme: Theme;
   player: Player;
   boardSize: number;
