@@ -4,14 +4,13 @@
 .settings {
   @include m.flex-center(column, center);
   flex: 1;
-  background-color: v.$color-bg-violet;
   padding: v.$spacing-l;
 
   &__card {
     @include m.flex-center(column, center);
     width: 100%;
     max-width: 36rem;
-    background-color: v.$color-light-gray;
+    background-color: v.$color-bg-cream;
     border: v.$retro-border;
     border-radius: v.$retro-radius;
     box-shadow: v.$retro-shadow-lg;
