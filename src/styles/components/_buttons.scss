@@ -1,31 +1,33 @@
 @use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
 
 .btn {
   font-family: v.$font-tanker;
   padding: v.$spacing-m v.$spacing-l;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center(row, center);
   gap: v.$spacing-m;
   width: 100%;
   border: v.$retro-border;
   border-radius: v.$retro-radius-sm;
-  box-shadow: v.$retro-shadow;
-  cursor: pointer;
-
+  box-shadow: v.$retro-shadow-lg;
   transition:
     transform 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     background-color 0.2s ease;
 
   &--primary {
-    background-color: var(--btn-primary-bg, #{v.$btn-ui-bg});
-    color: var(--btn-primary-text, #{v.$btn-ui-text});
+    background-color: v.$btn-ui-primary;
+    color: v.$btn-ui-text;
+  }
+
+  &--secondary {
+    background-color: v.$btn-ui-secondary;
+    color: v.$color-text-dark;
   }
 
   &--large {
     font-size: v.$font-size-2xl;
-    padding: v.$spacing-l v.$spacing-2xl;
+    padding: v.$spacing-m v.$spacing-l;
     letter-spacing: v.$letter-spacing-wide;
   }
 
@@ -36,22 +38,15 @@
   }
 
   &:hover {
-    background-color: var(--btn-primary-hover-bg, #{v.$btn-ui-hover-bg});
-    transform: translateY(-2px);
-    box-shadow: v.$retro-shadow-active;
-
+    background-color: v.$btn-ui-hover-bg;
     .btn__smile {
       transform: translateX(8px) scale(1.15) rotate(12deg);
+      scale: calc(1.1);
     }
   }
 
   &:active {
-    transform: translateY(6px);
-    box-shadow: v.$retro-shadow-active;
-
-    .btn__smile {
-      transform: translateX(4px) scale(0.85) rotate(-5deg);
-      transition: transform 0.04s ease;
-    }
+    transform: translateY(0.375rem);
+    box-shadow: 0rem 0.1rem 0rem #000000;
   }
 }
