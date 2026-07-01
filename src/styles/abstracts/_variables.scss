@@ -13,9 +13,9 @@ $global-config: (
   ),
 
   "retro": (
-    "border": 0.1875rem solid #16151d,
+    "border-thin": 0.1875rem solid #16151d,
     "border-thick": 0.3125rem solid #16151d,
-    "border-radius": 1.5rem,
+    "border-radius-lg": 1.5rem,
     "border-radius-sm": 0.75rem,
     "shadow-lg": 0rem 0.5rem 0rem #16151d,
     "shadow-sm": 0rem 0.25rem 0rem #16151d,
@@ -139,9 +139,9 @@ $themes: (
 
 $font-tanker: config("fonts", "tanker");
 
-$retro-border: config("retro", "border");
+$retro-border-thin: config("retro", "border-thin");
 $retro-border-thick: config("retro", "border-thick");
-$retro-radius: config("retro", "border-radius");
+$retro-radius-lg: config("retro", "border-radius-lg");
 $retro-radius-sm: config("retro", "border-radius-sm");
 $retro-shadow-lg: config("retro", "shadow-lg");
 $retro-shadow-sm: config("retro", "shadow-sm");
