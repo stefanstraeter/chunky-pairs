@@ -2,173 +2,159 @@
 @use "../abstracts/mixins" as m;
 
 .game {
-  background-color: var(--main-bg-violet);
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: v.$spacing-l v.$spacing-3xl;
+  @include m.flex-center(column, center);
+  padding: v.$spacing-xl v.$spacing-3xl;
+  min-height: 100vh;
+  position: relative;
 
   &__header {
     width: 100%;
-    max-width: v.$content-width;
-    margin-bottom: v.$spacing-l;
-    padding: v.$spacing-xl;
+    max-width: 62.5rem;
+    margin-bottom: v.$spacing-3xl;
   }
 
   &__status {
-    @include m.flex-center(row, space-between);
-    gap: v.$spacing-m;
-  }
-
-  &__board {
+    @include m.flex-center(row, space-evenly);
+    gap: v.$spacing-xl;
     width: 100%;
-    max-width: v.$content-width;
+  }
+
+  // ── DAS DREI-SPALTEN-LAYOUT ──────────────────
+  &__main-layout {
+    display: grid;
+    gap: v.$spacing-3xl;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  // Das weiße Gehäuse des Spielfelds
+  &__board {
+    background-color: #ffffff;
+    border: v.$retro-border-thin;
+    border-radius: v.$retro-radius-lg;
+    box-shadow: 0px 16px 0px #000000; // Fetter, brutaler Bodenschatten
+    padding: v.$spacing-2xl;
+    position: relative; // Wichtig für absolut zentrierten Timer unten
+    z-index: 2;
   }
 }
 
-.status {
-  &__scores {
-    @include m.flex-center(row, flex-start);
-    gap: v.$spacing-l;
-    background-color: var(--scores-bg);
-    padding: v.$spacing-m;
+// ── PLAYER SCORE CARDS ─────────────────────────
+.player-card {
+  background-color: #ffffff;
+  border: v.$retro-border-thin;
+  border-radius: v.$retro-radius-sm;
+  box-shadow: 0px 8px 0px #000000;
+  padding: v.$spacing-xl v.$spacing-l;
+  @include m.flex-center(column, center);
+  width: 140px;
+  position: relative;
+  z-index: 3; // Liegt über dem Board-Schatten
+
+  &--1 {
+    justify-self: end;
   }
 
-  &__current {
-    @include m.flex-center(row, flex-start);
-    gap: v.$spacing-m;
-    color: var(--main-bg-light);
+  &--2 {
+    justify-self: start;
+  }
+
+  &__avatar {
+    width: 3rem;
+    position: absolute;
+    top: -20px;
+  }
+
+  &__label {
+    font-family: v.$font-tanker;
+    font-size: v.$font-size-md;
+    color: #000000;
+    margin-top: v.$spacing-s;
+  }
+
+  &__score {
+    font-family: v.$font-tanker;
+    font-size: v.$font-size-3xl; // Riesige fette Zahl
+    color: #000000;
+    line-height: 1;
   }
 }
 
-// ── Score labels ─────────────────────────────
-.score {
-  display: flex;
-  align-items: center;
-  gap: v.$spacing-s;
-  font-size: var(--status-font-size);
-  font-weight: var(--status-font-weight);
-  color: var(--main-bg-light);
+.turn-timer {
+  position: absolute;
+  bottom: -90px; // Schaut unten aus dem weißen Kasten heraus (Wert eventuell an SVG-Größe anpassen)
+  left: 50%;
+  transform: translateX(-50%); // Perfekt horizontal zentriert
 
-  &--blue {
-    color: var(--player-1);
-  }
-  &--orange {
-    color: var(--player-2);
-  }
+  // Die Box passt sich exakt der Größe deines SVGs an
+  width: 160px; // Passe das an die reale Breite deines SVGs an
+  height: 120px; // Passe das an die reale Höhe deines SVGs an
 
-  &__icon {
-    height: 1.2rem;
-    width: auto;
+  @include m.flex-center(column, center);
+  z-index: 10;
+
+  // ── DAS HINTERGRUND-SVG ─────────────────────────
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    z-index: 1; // Liegt ganz unten innerhalb des Tunnels
+
+    // Brutalistischer Tipp: Falls dein SVG noch keinen Schatten hat,
+    // kannst du ihm hier einen knackigen Drop-Shadow verpassen!
+    filter: drop-shadow(0px 6px 0px #000000);
   }
-}
 
-// ── Current player indicator ─────────────────
-.current-indicator {
-  height: 1.2rem;
-  width: auto;
-  object-fit: contain;
-  vertical-align: middle;
-}
+  // ── DER TEXT ÜBER DEM SVG ───────────────────────
+  &__content {
+    position: relative;
+    z-index: 2; // Liegt über dem SVG!
+    @include m.flex-center(column, center);
+    text-align: center;
+    width: 100%;
+    // Falls der Text wegen der Pfeil-Krone des SVGs zu hoch sitzt,
+    // kannst du ihn hier mit ein bisschen Padding nach unten drücken:
+    padding-top: v.$spacing-m;
+  }
 
-// ── Font family per theme ─────────────────────
-body[data-theme="magenta-rush"] {
-  .game__status {
+  &__player {
     font-family: v.$font-tanker;
-
-    #btn-exit-game {
-      background-color: #425651;
-      color: #ffffff;
-      border: 2px solid #4cd5bc;
-
-      &:hover {
-        transform: none;
-        box-shadow: 0 2px 6px #4cd5bc8c;
-      }
-    }
+    font-size: v.$font-size-xs;
+    color: #ffffff; // Oder #000000, falls Player 2 (Orange) dunklen Text braucht
+    letter-spacing: v.$letter-spacing-wide;
   }
 
-  .game__header {
-    background-color: transparent;
-  }
-}
-
-body[data-theme="electric-blue"] {
-  .game__status {
+  &__time {
     font-family: v.$font-tanker;
-
-    #btn-exit-game {
-      --exit-accent: #e71d4f;
-      background-color: transparent;
-      border: 2px solid var(--exit-accent);
-      border-radius: 0.5rem;
-      color: #ffffff;
-      box-shadow: 0 2px 6px #e71d4f8c;
-
-      img {
-        display: none;
-      }
-
-      &::before {
-        content: "";
-        width: 1rem;
-        height: 1rem;
-        flex-shrink: 0;
-        background-color: currentColor;
-        -webkit-mask-image: url("/img/00_general/move_item.png");
-        -webkit-mask-position: center;
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-size: contain;
-        mask-image: url("/img/00_general/move_item.png");
-        mask-position: center;
-        mask-repeat: no-repeat;
-        mask-size: contain;
-      }
-
-      &:hover {
-        color: var(--exit-accent);
-        box-shadow: 0 3px 8px #e71d4f8c;
-      }
-    }
-  }
-
-  .game__header {
-    background-color: #535d75;
-    border-radius: 0.5rem;
-  }
-
-  .game-exit-modal .btn--exit::before {
-    display: none;
-  }
-
-  .status__scores {
-    border-radius: 0.5rem;
-  }
-
-  .status__current {
-    color: v.$color-bg-violet;
-    font-size: v.$font-size-lg;
-    font-weight: v.$font-weight-700;
+    font-size: v.$font-size-2xl;
+    color: #ffffff;
+    line-height: 1;
   }
 }
 
-// ── Board grid ───────────────────────────────
+// ── MEMORY CARDS GRID ─────────────────────────
 .game-board__grid {
   display: grid;
-  justify-content: center;
   gap: v.$spacing-m;
-  margin-top: v.$spacing-m;
+  justify-content: center;
 
   &.grid--16 {
-    grid-template-columns: repeat(4, minmax(0, 120px));
+    grid-template-columns: repeat(4, 90px);
+    grid-template-rows: repeat(4, 90px);
   }
-
   &.grid--24 {
-    grid-template-columns: repeat(6, minmax(0, 100px));
+    grid-template-columns: repeat(6, 80px);
+    grid-template-rows: repeat(4, 80px);
   }
-
   &.grid--36 {
-    grid-template-columns: repeat(6, minmax(0, 100px));
+    grid-template-columns: repeat(6, 80px);
+    grid-template-rows: repeat(6, 80px);
   }
 }
