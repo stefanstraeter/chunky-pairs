@@ -7,7 +7,7 @@ import {
   createDrawScreenTemplate,
   createGameOverScreenTemplate,
   createGameScreenTemplate,
-  createSettingsScreenTemplate,
+  createMatchSetupScreenTemplate,
   createVibesWinnerTemplate,
   createElectricBlueWinnerTemplate,
 } from "../templates/screen-templates";
@@ -41,12 +41,12 @@ export function showHomeScreen(): void {
 }
 
 /**
- * @description Displays the settings screen and sets up its event listeners.
+ * @description Displays the match setup screen and sets up its event listeners.
  * @export
  */
-export function showSettingsScreen(): void {
-  renderScreen(createSettingsScreenTemplate());
-  setupSettingsListeners();
+export function showMatchSetupScreen(): void {
+  renderScreen(createMatchSetupScreenTemplate());
+  setupMatchSetupListeners();
 }
 
 /**
@@ -80,7 +80,7 @@ export function showDrawScreen(): void {
  */
 function setupHomeListeners(): void {
   document.getElementById("btnPlay")?.addEventListener("click", () => {
-    showSettingsScreen();
+    showMatchSetupScreen();
   });
 }
 
@@ -96,9 +96,9 @@ function setupEndScreenListeners(): void {
 }
 
 /**
- * @description Sets up event listeners for the settings screen, including theme selection, player selection, board size selection, and the start button.
+ * @description Sets up event listeners for the match setup screen, including theme selection, player selection, board size selection, and the start button.
  */
-function setupSettingsListeners(): void {
+function setupMatchSetupListeners(): void {
   setupThemeRadios();
   setupThemeHoverListeners();
   setupPlayerRadios();
@@ -107,11 +107,11 @@ function setupSettingsListeners(): void {
 }
 
 /* ==========================================================================
-   SETTINGS INPUT HANDLERS
+  MATCH SETUP INPUT HANDLERS
    ========================================================================== */
 
 /**
- * @description Enables the start button only when all required settings (theme, player, board size) are selected.
+ * @description Enables the start button only when all required match setup options (theme, player, board size) are selected.
  */
 function checkStartEnabled(): void {
   const btnStart = document.getElementById("btn-start") as HTMLButtonElement | null;
@@ -204,9 +204,9 @@ function setupBoardSizeRadios(): void {
 }
 
 /**
- * @description Saves the selected settings (theme, player, board size) from the settings screen to the global game state and updates the document body's data-theme attribute to reflect the selected theme.
+ * @description Saves the selected match setup options (theme, player, board size) from the match setup screen to the global game state and updates the document body's data-theme attribute to reflect the selected theme.
  */
-function saveSettingsToState(): void {
+function saveMatchSetupToState(): void {
   const theme = document.querySelector<HTMLInputElement>('input[name="theme"]:checked')?.value;
   const player = document.querySelector<HTMLInputElement>('input[name="player"]:checked')?.value;
   const size = document.querySelector<HTMLInputElement>('input[name="board-size"]:checked')?.value;
@@ -218,11 +218,11 @@ function saveSettingsToState(): void {
 }
 
 /**
- * @description Sets up the event listener for the start button on the settings screen to save the selected settings to the game state and navigate to the game screen when clicked.
+ * @description Sets up the event listener for the start button on the match setup screen to save the selected options to the game state and navigate to the game screen when clicked.
  */
 function setupStartButton(): void {
   document.getElementById("btn-start")?.addEventListener("click", () => {
-    saveSettingsToState();
+    saveMatchSetupToState();
     renderScreen(createGameScreenTemplate());
     initGame();
   });

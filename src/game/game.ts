@@ -1,25 +1,10 @@
+import { gameState } from "../state";
+import { getWinner } from "./helpers";
+import { showMatchSetupScreen, showWinnerScreen, showDrawScreen, renderScreen } from "../ui/navigation";
+import { buildGrid, buildHeader, setupExitModal, updateDrawScreen, updateGameOverScreen, updateHeader, updateWinnerScreen } from "./view";
+import { createGameOverScreenTemplate } from "../templates/screen-templates";
 
-import { gameState } from '../state';
-import { getWinner } from './helpers';
-import { 
-  showSettingsScreen, 
-  showWinnerScreen, 
-  showDrawScreen,
-  renderScreen, 
-} from '../ui/navigation';
-import { 
-  buildGrid, 
-  buildHeader, 
-  setupExitModal, 
-  updateDrawScreen, 
-  updateGameOverScreen, 
-  updateHeader, 
-  updateWinnerScreen 
-} from './view';
-import { createGameOverScreenTemplate } from '../templates/screen-templates';
-
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /* ==========================================================================
    SETUP & EXIT FUNCTIONS
@@ -37,12 +22,12 @@ function resetState(): void {
 }
 
 /**
- * @description  Handles the exit confirmation by resetting the game state, applying the default theme, and showing the settings screen.
+ * @description  Handles the exit confirmation by resetting the game state, applying the default theme, and showing the match setup screen.
  */
 function handleExitConfirmation(): void {
   resetState();
-  document.body.dataset.theme = 'magenta-rush';
-  showSettingsScreen();
+  document.body.dataset.theme = "magenta-rush";
+  showMatchSetupScreen();
 }
 
 /* ==========================================================================
@@ -56,8 +41,8 @@ function handleExitConfirmation(): void {
  */
 function applyMatchState(first: HTMLElement, second: HTMLElement): void {
   const playerClass = `card--matched-${gameState.currentPlayer}`;
-  first.classList.add('is-matched', playerClass);
-  second.classList.add('is-matched', playerClass);
+  first.classList.add("is-matched", playerClass);
+  second.classList.add("is-matched", playerClass);
 
   gameState.scores[gameState.currentPlayer]++;
   gameState.matchedPairs++;
@@ -70,14 +55,12 @@ function applyMatchState(first: HTMLElement, second: HTMLElement): void {
  */
 function showFinalResultScreen(): void {
   const winner = getWinner();
-  if (winner === 'draw') {
+  if (winner === "draw") {
     showDrawScreen();
     updateDrawScreen();
-
   } else {
     showWinnerScreen();
     updateWinnerScreen(winner);
-
   }
 }
 
@@ -90,14 +73,14 @@ async function runEndOfGameSequence(): Promise<void> {
   renderScreen(createGameOverScreenTemplate());
   updateGameOverScreen();
 
-  await delay(3000); 
+  await delay(3000);
   showFinalResultScreen();
 }
 
 /**
  * @description Handles the logic when two cards are matched, updating the game state and checking for the end of the game.
  * @param {HTMLElement} first - The first card that was flipped and matched.
- * @param {HTMLElement} second - The second card that was flipped and matched.  
+ * @param {HTMLElement} second - The second card that was flipped and matched.
  */
 function handleMatch(first: HTMLElement, second: HTMLElement): void {
   applyMatchState(first, second);
@@ -115,11 +98,11 @@ function handleMatch(first: HTMLElement, second: HTMLElement): void {
  */
 function handleMismatch(first: HTMLElement, second: HTMLElement): void {
   setTimeout(() => {
-    first.classList.remove('is-flipped');
-    second.classList.remove('is-flipped');
+    first.classList.remove("is-flipped");
+    second.classList.remove("is-flipped");
 
     gameState.flippedCards = [];
-    gameState.currentPlayer = gameState.currentPlayer === 'blue' ? 'orange' : 'blue';
+    gameState.currentPlayer = gameState.currentPlayer === "blue" ? "orange" : "blue";
     gameState.isLocked = false;
 
     updateHeader();
@@ -150,11 +133,7 @@ function checkMatch(): void {
  * @return {boolean} True if the card click is invalid, false otherwise.
  */
 function isCardClickInvalid(card: HTMLElement): boolean {
-  return (
-    gameState.isLocked ||
-    card.classList.contains('is-flipped') ||
-    card.classList.contains('is-matched')
-  );
+  return gameState.isLocked || card.classList.contains("is-flipped") || card.classList.contains("is-matched");
 }
 
 /**
@@ -164,7 +143,7 @@ function isCardClickInvalid(card: HTMLElement): boolean {
 function handleCardClick(card: HTMLElement): void {
   if (isCardClickInvalid(card)) return;
 
-  card.classList.add('is-flipped');
+  card.classList.add("is-flipped");
   gameState.flippedCards.push(card);
 
   if (gameState.flippedCards.length === 2) {
@@ -177,13 +156,13 @@ function handleCardClick(card: HTMLElement): void {
    INITIALIZATION
    ========================================================================== */
 
-/** 
+/**
  * @description Initializes the game by setting up the grid, header, and exit modal, and resetting the game state.
- * @export 
+ * @export
  */
 export function initGame(): void {
-  const grid = document.getElementById('memory-grid');
-  const header = document.querySelector('.game__header');
+  const grid = document.getElementById("memory-grid");
+  const header = document.querySelector(".game__header");
   if (!grid || !header) return;
 
   resetState();
