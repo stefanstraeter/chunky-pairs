@@ -2,7 +2,7 @@
 
 body {
   position: relative;
-  background-color: v.$color-bg-violet;
+  background-color: v.$color-bg-violet-light;
 
   &::after {
     content: "";
@@ -11,7 +11,7 @@ body {
     left: 0;
     width: 100%;
     height: 25vh;
-    background-color: #582cd1;
+    background-color: v.$color-bg-violet-dark;
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
     z-index: -1;
@@ -40,7 +40,7 @@ body {
     left: 0;
     width: 100%;
     height: 20vh;
-    background-color: #582cd1;
+    background-color: v.$color-bg-violet;
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
 
