@@ -1,6 +1,6 @@
 import { gameState } from "../state";
 import { createCardTemplate, createHeaderTemplate } from "../templates/game-templates";
-import { createCardValues, getThemeFolder } from "./helpers";
+import { createCardValues } from "./helpers";
 
 /* ==========================================================================
   GAME CONTROLS
@@ -27,32 +27,22 @@ export function buildHeader(header: Element): void {
   header.innerHTML = createHeaderTemplate();
 }
 
-/**
- * @description Creates a card element with the specified value and click handler.
- * @param {number} val - The value to be assigned to the card's data attribute and used in the card template.
- * @param {(card: HTMLElement) => void} onCardClick - The function to be called when the card is clicked.
- * @return {HTMLButtonElement} - The created card element with the appropriate classes, data attributes, inner HTML, and click event listener.
- */
-function createCard(val: number, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
+function createCard(cardName: string, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
   const card = document.createElement("button");
   card.className = "card";
-  card.dataset.value = val.toString();
-  card.innerHTML = createCardTemplate(val, getThemeFolder());
+  card.dataset.value = cardName;
+  card.innerHTML = createCardTemplate(cardName);
   card.addEventListener("click", () => onCardClick(card));
   return card;
 }
 
-/**
- * @description Builds the game grid by clearing its content, setting its class based on the current board size, generating card values, and appending card elements created with the createCard function.
- * @export
- * @param {HTMLElement} grid - The grid element to be built.
- */
 export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) => void): void {
   grid.innerHTML = "";
   grid.className = `game-board__grid grid--${gameState.boardSize}`;
 
   const cardValues = createCardValues(gameState.boardSize);
-  cardValues.forEach((val) => grid.appendChild(createCard(val, onCardClick)));
+
+  cardValues.forEach((cardName) => grid.appendChild(createCard(cardName, onCardClick)));
 }
 
 /* ==========================================================================
