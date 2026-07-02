@@ -23,7 +23,8 @@ $global-config: (
   ),
 
   "colors": (
-    "bg-violet": #7141f5,
+    "bg-violet-light": #7b2cbf,
+    "bg-violet-dark": #6c1aaa,
     "bg-cream": #f1f1f1,
     "text-dark": #16151d,
     "text-light": #f1f1f1,
@@ -147,7 +148,8 @@ $retro-shadow-lg: config("retro", "shadow-lg");
 $retro-shadow-sm: config("retro", "shadow-sm");
 $retro-shadow-active: config("retro", "shadow-active");
 
-$color-bg-violet: config("colors", "bg-violet");
+$color-bg-violet-light: config("colors", "bg-violet-light");
+$color-bg-violet-dark: config("colors", "bg-violet-dark");
 $color-bg-cream: config("colors", "bg-cream");
 
 $color-text-dark: config("colors", "text-dark");
