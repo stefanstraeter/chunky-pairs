@@ -1,9 +1,30 @@
 import { gameState } from "../state";
 import { showMatchSetupScreen } from "../ui/navigation";
-import { buildGrid, buildHeader, setupGameControls, updateGameLayout, updateTimerSeconds } from "./view";
+import { togglePlayer } from "./helpers";
+import { buildGrid, buildHeader, setupGameControls, updateGameLayout, updateTimerSeconds, showConfirmationModal } from "./view";
 
 /* ==========================================================================
-   INITIALIZATION OF GAME
+   CONSTANTS & VARIABLES
+   ========================================================================== */
+
+const MODAL_TEXTS = {
+  EXIT: {
+    TITLE: "Giving Up?",
+    MESSAGE: "Your current match will be lost forever!",
+  },
+  RESTART: {
+    TITLE: "Try Again?",
+    MESSAGE: "Want to wipe the board, reshuffle the cards, and try a better strategy?",
+  },
+} as const;
+
+const TURN_TIME_LIMIT = 10;
+
+let timerIntervalId: number | null = null;
+let currentSecondsLeft = TURN_TIME_LIMIT;
+
+/* ==========================================================================
+   PUBLIC API / EXPORTS
    ========================================================================== */
 
 /**
@@ -24,19 +45,35 @@ export function initGame(): void {
   startTurnTimer();
 }
 
+/**
+ * @description Stops the turn timer by clearing the interval and resetting the timer ID.
+ * @export
+ */
+export function stopTurnTimer(): void {
+  if (timerIntervalId !== null) {
+    clearInterval(timerIntervalId);
+    timerIntervalId = null;
+  }
+}
+
 /* ==========================================================================
-   SETUP & EXIT FUNCTIONS
+   CLICK & INTERACTION HANDLERS
    ========================================================================== */
 
 /**
- * @description Resets the game state to its initial values.
+ * @description Handles the logic when a card is clicked, flipping it and checking for matches if two cards are flipped. It also checks for invalid clicks to prevent actions when the game is locked or the card is already flipped or matched.
+ * @param {HTMLElement} card - The card element that was clicked.
  */
-function resetState(): void {
-  gameState.currentPlayer = gameState.player;
-  gameState.scores = { "player-1": 0, "player-2": 0 };
-  gameState.flippedCards = [];
-  gameState.matchedPairs = 0;
-  gameState.isLocked = false;
+function handleCardClick(card: HTMLElement): void {
+  if (isCardClickInvalid(card)) return;
+
+  card.classList.add("is-flipped");
+  gameState.flippedCards.push(card);
+
+  if (gameState.flippedCards.length === 2) {
+    gameState.isLocked = true;
+    checkMatch();
+  }
 }
 
 /**
@@ -44,18 +81,92 @@ function resetState(): void {
  */
 function handleExitConfirmation(): void {
   stopTurnTimer();
-  resetState();
-  document.body.dataset.theme = "magenta-rush";
-  showMatchSetupScreen();
+
+  showConfirmationModal(
+    MODAL_TEXTS.EXIT.TITLE,
+    MODAL_TEXTS.EXIT.MESSAGE,
+    () => {
+      resetState();
+      document.body.dataset.theme = "magenta-rush";
+      showMatchSetupScreen();
+    },
+    () => {
+      startTurnTimer();
+    },
+  );
 }
 
+/**
+ * @description Handle the restart game confirmation by stopping the timer, showing a confirmation modal, and either restarting the game or resuming the timer based on user input.
+ */
 function handleRestartGame(): void {
-  initGame();
+  stopTurnTimer();
+
+  showConfirmationModal(
+    MODAL_TEXTS.RESTART.TITLE,
+    MODAL_TEXTS.RESTART.MESSAGE,
+    () => {
+      initGame();
+    },
+    () => {
+      startTurnTimer();
+    },
+  );
 }
 
 /* ==========================================================================
-    MATCH LOGIC
+   MATCH & WINNER LOGIC
    ========================================================================== */
+
+/**
+ * @description Checks if the two flipped cards match by comparing their data values, and calls the appropriate handler for a match or mismatch.
+ */
+function checkMatch(): void {
+  const [first, second] = gameState.flippedCards;
+  const isMatch = first.dataset.value === second.dataset.value;
+
+  if (isMatch) {
+    handleMatch(first, second);
+  } else {
+    handleMismatch(first, second);
+  }
+}
+
+/**
+ * @description Handles the logic when two cards are matched, updating the game state and checking for the end of the game.
+ * @param {HTMLElement} first - The first card that was flipped and matched.
+ * @param {HTMLElement} second - The second card that was flipped and matched.
+ */
+function handleMatch(first: HTMLElement, second: HTMLElement): void {
+  applyMatchState(first, second);
+  updateGameLayout();
+
+  if (gameState.matchedPairs === gameState.boardSize / 2) {
+    stopTurnTimer();
+    finishGame();
+  } else {
+    startTurnTimer();
+  }
+}
+
+/**
+ * @description Handles the logic when two flipped cards do not match, flipping them back over after a delay and switching the current player.
+ * @param {HTMLElement} first - The first card that was flipped and did not match.
+ * @param {HTMLElement} second - The second card that was flipped and did not match.
+ */
+function handleMismatch(first: HTMLElement, second: HTMLElement): void {
+  setTimeout(() => {
+    first.classList.remove("is-flipped");
+    second.classList.remove("is-flipped");
+
+    gameState.flippedCards = [];
+    gameState.currentPlayer = togglePlayer(gameState.currentPlayer);
+    gameState.isLocked = false;
+
+    updateGameLayout();
+    startTurnTimer();
+  }, 1000);
+}
 
 /**
  * @description Applies the matched state to the two matched cards, updates the score for the current player, and checks if the game has ended.
@@ -74,97 +185,17 @@ function applyMatchState(first: HTMLElement, second: HTMLElement): void {
   gameState.isLocked = false;
 }
 
+/**
+ * @description Finishes the game by clearing the flipped cards and locking the game state to prevent further interactions.
+ */
 function finishGame(): void {
   gameState.flippedCards = [];
   gameState.isLocked = true;
 }
 
-/**
- * @description Handles the logic when two cards are matched, updating the game state and checking for the end of the game.
- * @param {HTMLElement} first - The first card that was flipped and matched.
- * @param {HTMLElement} second - The second card that was flipped and matched.
- */
-function handleMatch(first: HTMLElement, second: HTMLElement): void {
-  applyMatchState(first, second);
-  updateGameLayout();
-
-  if (gameState.matchedPairs === gameState.boardSize / 2) {
-    stopTurnTimer(); // <-- HIER: Timer stoppen, das Spiel ist vorbei!
-    finishGame();
-  } else {
-    startTurnTimer(); // <-- HIER: Frische 30s für das nächste Pärchen!
-  }
-}
-
-/**
- * @description Handles the logic when two flipped cards do not match, flipping them back over after a delay and switching the current player.
- * @param {HTMLElement} first - The first card that was flipped and did not match.
- * @param {HTMLElement} second - The second card that was flipped and did not match.
- */
-function handleMismatch(first: HTMLElement, second: HTMLElement): void {
-  setTimeout(() => {
-    first.classList.remove("is-flipped");
-    second.classList.remove("is-flipped");
-
-    gameState.flippedCards = [];
-    gameState.currentPlayer = gameState.currentPlayer === "player-1" ? "player-2" : "player-1";
-    gameState.isLocked = false;
-
-    updateGameLayout();
-    startTurnTimer();
-  }, 1000);
-}
-
-/**
- * @description Checks if the two flipped cards match by comparing their data values, and calls the appropriate handler for a match or mismatch.
- */
-function checkMatch(): void {
-  const [first, second] = gameState.flippedCards;
-  const isMatch = first.dataset.value === second.dataset.value;
-
-  if (isMatch) {
-    handleMatch(first, second);
-  } else {
-    handleMismatch(first, second);
-  }
-}
-
 /* ==========================================================================
-   CLICK INTERACTION
+  TIMER LOGIC
    ========================================================================== */
-
-/**
- * @description Determines if a card click is invalid by checking if the game is currently locked or if the card is already flipped or matched.
- * @param {HTMLElement} card - The card element that was clicked.
- * @return {boolean} True if the card click is invalid, false otherwise.
- */
-function isCardClickInvalid(card: HTMLElement): boolean {
-  return gameState.isLocked || card.classList.contains("is-flipped") || card.classList.contains("is-matched");
-}
-
-/**
- * @description Handles the logic when a card is clicked, flipping it and checking for matches if two cards are flipped. It also checks for invalid clicks to prevent actions when the game is locked or the card is already flipped or matched.
- * @param {HTMLElement} card - The card element that was clicked.
- */
-function handleCardClick(card: HTMLElement): void {
-  if (isCardClickInvalid(card)) return;
-
-  card.classList.add("is-flipped");
-  gameState.flippedCards.push(card);
-
-  if (gameState.flippedCards.length === 2) {
-    gameState.isLocked = true;
-    checkMatch();
-  }
-}
-
-/* ==========================================================================
-  TURN TIMER LOGIC
-   ========================================================================== */
-
-const TURN_TIME_LIMIT = 10;
-let timerIntervalId: number | null = null;
-let currentSecondsLeft = TURN_TIME_LIMIT;
 
 /**
  * @description Starts the turn timer, updating the countdown display every second and handling timeout when the timer reaches zero.
@@ -186,24 +217,28 @@ function startTurnTimer(): void {
 }
 
 /**
- * @description Stops the turn timer by clearing the interval and resetting the timer ID.
- * @export
- */
-export function stopTurnTimer(): void {
-  if (timerIntervalId !== null) {
-    clearInterval(timerIntervalId);
-    timerIntervalId = null;
-  }
-}
-
-/**
  * @description Handles the logic when the turn timer runs out, resetting flipped cards, switching the current player, and updating the game layout.
  */
 function handleTimeOut(): void {
   resetFlippedCards();
-  gameState.currentPlayer = gameState.currentPlayer === "player-1" ? "player-2" : "player-1";
+  gameState.currentPlayer = togglePlayer(gameState.currentPlayer);
   updateGameLayout();
   startTurnTimer();
+}
+
+/* ==========================================================================
+   STATE UTILITIES
+   ========================================================================== */
+
+/**
+ * @description Resets the game state to its initial values.
+ */
+function resetState(): void {
+  gameState.currentPlayer = gameState.player;
+  gameState.scores = { "player-1": 0, "player-2": 0 };
+  gameState.flippedCards = [];
+  gameState.matchedPairs = 0;
+  gameState.isLocked = false;
 }
 
 /**
@@ -215,4 +250,13 @@ function resetFlippedCards(): void {
   });
   gameState.flippedCards = [];
   gameState.isLocked = false;
+}
+
+/**
+ * @description Determines if a card click is invalid by checking if the game is currently locked or if the card is already flipped or matched.
+ * @param {HTMLElement} card - The card element that was clicked.
+ * @return {boolean} True if the card click is invalid, false otherwise.
+ */
+function isCardClickInvalid(card: HTMLElement): boolean {
+  return gameState.isLocked || card.classList.contains("is-flipped") || card.classList.contains("is-matched");
 }
