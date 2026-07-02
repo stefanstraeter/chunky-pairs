@@ -15,7 +15,7 @@ export function createHomeScreenTemplate(): string {
         <h1 class="home__title">Chunky Pairs</h1>
 
         <div class="home__actions">
-          <button id="btnPlay" class="btn btn--primary btn--large">
+          <button id="btn-enter-game" class="btn btn--primary btn--large">
             Smash me <img src="${assetPath("/img/00_general/player-vs-player.svg")}" class="btn__smile" />
           </button>
         </div>
@@ -66,12 +66,12 @@ export function createMatchSetupScreenTemplate(): string {
             <legend class="match-setup__legend">Pick Your Hero</legend>
             <div class="match-setup__grid">
               <label class="match-setup__tile">
-                <input type="radio" name="player" value="blue" />
-                <span>Red</span>
+                <input type="radio" name="player" value="player-1" />
+                <span>Player 1</span>
               </label>
               <label class="match-setup__tile">
-                <input type="radio" name="player" value="orange" />
-                <span>Orange</span>
+                <input type="radio" name="player" value="player-2" />
+                <span>Player 2</span>
               </label>
             </div>
           </fieldset>
@@ -95,7 +95,7 @@ export function createMatchSetupScreenTemplate(): string {
           </fieldset>
         </div>
 
-        <button id="btn-start" class="btn btn--primary btn--large match-setup__start-btn" disabled>
+        <button id="btn-start-game" class="btn btn--primary btn--large match-setup__start-btn" disabled>
           Let's Play!
         </button>
 
@@ -138,102 +138,7 @@ export function createGameScreenTemplate(): string {
           <span id="score-player-2" class="player-card__score">0</span>
         </div>
       </div>
-    </section>
-  `;
-}
-
-/* ==========================================================================
-    TEMPLATE GAME OVER SCREEN
-    ========================================================================== */
-
-/**
- * @description Creates game-over screen markup for lazy mounting, which includes a title, subtitle, and final scores for each player.
- * @export
- * @return {string} The HTML string representing the game-over screen template, which consists of a section with an id of "screen-gameover" and a class of "screen gameover".
- */
-export function createGameOverScreenTemplate(): string {
-  return `
-    <section id="screen-gameover" class="screen gameover">
-      <div class="gameover__content">
-        <h2 class="gameover__title">GAME OVER</h2>
-        <p class="gameover__subtitle">Final score</p>
-        <div class="gameover__scores status__scores">
-          <span class="score score--blue">
-            <img id="gameover-blue-icon" class="score__icon" src="${assetPath("/img/00_general/label_blue.svg")}" alt="" />
-            <span id="gameover-blue-label">Blue </span><span id="gameover-blue-score" class="score__value">0</span>
-          </span>
-          <span class="score score--orange">
-            <img id="gameover-orange-icon" class="score__icon" src="${assetPath("/img/00_general/label_orange.svg")}" alt="" />
-            <span id="gameover-orange-label">Orange </span><span id="gameover-orange-score" class="score__value">0</span>
-          </span>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-/* ==========================================================================
-    TEMPLATE WINNER SCREEN
-    ========================================================================== */
-
-/**
- * @description Creates winner screen markup for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen.
- * @export
- * @return {string} The HTML string representing the winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner".
- */
-export function createVibesWinnerTemplate(): string {
-  return `
-    <section id="screen-winner" class="screen winner slide-in-top">
-      <div class="winner__content">
-        <img class="winner__header-icon" src="${assetPath("/img/00_general/confetti.png")}" alt="" />
-        <h2 class="winner__title">The winner is</h2>
-        <div class="winner__winner" data-winner="">
-          <p id="winner-name" class="winner__winner-name"></p>
-          <img id="winner-icon" class="winner__winner-icon" src="" alt="Winner trophy" />
-        </div>
-        <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">Back to start</button>
-      </div>
-    </section>
-  `;
-}
-
-/**
- * @description Creates a winner screen template with a electric-blue theme for lazy mounting, which includes a title, an area to display the winner's name and icon, and a button to return to the start screen. The design of this template is tailored to fit the electric-blue theme, featuring a more dynamic layout and styling compared to the magenta-rush theme.
- * @export
- * @return {string} The HTML string representing the electric-blue-themed winner screen template, which consists of a section with an id of "screen-winner" and a class of "screen winner winner--electric-blue", containing a div for the winner content, including the title, winner information, and a back button. The layout and styling of this template are designed to evoke a electric-blue atmosphere, with bold typography and a more energetic presentation.
- */
-export function createElectricBlueWinnerTemplate(): string {
-  return `
-    <section id="screen-winner" class="screen winner winner--electric-blue slide-in-bottom">
-      <div class="winner__content">
-        <h2 class="winner__title">STAGE CLEAR!</h2>
-        <div class="winner__winner" data-winner="">
-          <p id="winner-name" class="winner__winner-name"></p>
-          <img id="winner-icon" class="winner__winner-icon" src="" alt="Winner trophy" />
-        </div>
-        <button id="btn-back-to-start-winner" class="btn btn--exit winner__back-btn" type="button">home</button>
-      </div>
-    </section>
-  `;
-}
-
-/* ==========================================================================
-    TEMPLATE DRAW SCREEN
-    ========================================================================== */
-/**
- * @description Creates draw screen markup for lazy mounting, which includes a title, subtitle, and an icon indicating a draw, along with a button to return to the start screen.
- * @export
- * @return {string} The HTML string representing the draw screen template, which consists of a section with an id of "screen-draw" and a class of "screen draw".
- */
-export function createDrawScreenTemplate(): string {
-  return `
-    <section id="screen-draw" class="screen draw">
-      <div class="draw__content">
-        <h2 class="draw__title">It's a</h2>
-        <p class="draw__name">DRAW</p>
-        <img class="draw__icon" src="${assetPath("/img/00_general/draw_icon_code.png")}" alt="Draw" />
-        <button id="btn-back-to-start-draw" class="btn btn--exit draw__back-btn" type="button">Back to start</button>
-      </div>
+      <div id="exit-modal-container"></div>
     </section>
   `;
 }
