@@ -1,3 +1,6 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
 .card {
   display: block;
   width: 100%;
@@ -7,13 +10,14 @@
   border: none;
   cursor: pointer;
   perspective: 1000px;
+  position: relative;
 
   &__inner {
     position: relative;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 300ms ease-in-out;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__front,
@@ -22,29 +26,35 @@
     inset: 0;
     backface-visibility: hidden;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include m.flex-center(column, center);
+    border: v.$retro-border-thin;
+    border-radius: v.$retro-radius-sm;
+    box-shadow: v.$retro-shadow-sm;
+    transition:
+      transform 0.1s ease,
+      box-shadow 0.1s ease;
+  }
+
+  &:active:not(.is-flipped):not(.is-matched) {
+    .card__front {
+      transform: translate(2px, 2px);
+      box-shadow: v.$retro-shadow-sm;
+    }
   }
 
   &__front {
-    background-color: var(--main-bg-dark);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    background-color: v.$color-bg-violet-light;
   }
 
   &__back {
     transform: rotateY(180deg);
+    background-color: v.$color-bg-cream;
 
     img {
-      width: auto;
-      height: auto;
+      width: 70%;
+      height: 70%;
       object-fit: contain;
+      display: block;
     }
   }
 
@@ -58,15 +68,30 @@
     .card__inner {
       transform: rotateY(180deg);
     }
+
+    .card__back {
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+    }
   }
 
   &--matched-player-1 {
-    outline: 4px solid #2bb1ff;
-    border-radius: 8px;
+    .card__back {
+      border-color: var(--player-1);
+      background-color: var(--player-1);
+      border: v.$retro-border-thin;
+      box-shadow: v.$retro-shadow-sm;
+    }
   }
 
   &--matched-player-2 {
-    outline: 4px solid #f58e39;
-    border-radius: 8px;
+    .card__back {
+      border-color: var(--player-2);
+      background-color: var(--player-2);
+      border: v.$retro-border-thin;
+      box-shadow: v.$retro-shadow-sm;
+    }
   }
 }
