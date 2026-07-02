@@ -36,10 +36,12 @@ export function buildHeader(header: Element): void {
  */
 function createCard(cardName: string, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
   const card = document.createElement("button");
+
   card.className = "card";
   card.dataset.value = cardName;
   card.innerHTML = createCardTemplate(cardName);
   card.addEventListener("click", () => onCardClick(card));
+
   return card;
 }
 
@@ -69,7 +71,7 @@ export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) =>
 export function updateGameLayout(): void {
   updateScoreDisplay();
   updateActivePlayerCards();
-  updateTimerWidget();
+  updateTimerBackground();
 }
 
 /**
@@ -102,10 +104,9 @@ function updateActivePlayerCards(): void {
 /**
  * @description Updates the turn timer widget by changing the label and background image based on the current player in the game state.
  */
-function updateTimerWidget(): void {
+function updateTimerBackground(): void {
   const turnLabel = document.getElementById("turn-timer-label");
   const timerBg = document.getElementById("turn-timer-bg") as HTMLImageElement | null;
-
   const isP1 = gameState.currentPlayer === "player-1";
 
   if (turnLabel) {
@@ -114,5 +115,18 @@ function updateTimerWidget(): void {
 
   if (timerBg) {
     timerBg.src = isP1 ? assetPath("img/00_general/turn-background-red.svg") : assetPath("img/00_general/turn-background-orange.svg");
+  }
+}
+
+/**
+ * @description Updates the turn timer countdown display with the given number of seconds.
+ * @export
+ * @param {number} seconds
+ */
+export function updateTimerSeconds(seconds: number): void {
+  const countdownEl = document.getElementById("turn-timer-countdown");
+
+  if (countdownEl) {
+    countdownEl.textContent = `${seconds}s`;
   }
 }
