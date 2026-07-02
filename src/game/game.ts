@@ -1,6 +1,6 @@
 import { gameState } from "../state";
 import { showMatchSetupScreen } from "../ui/navigation";
-import { buildGrid, buildHeader, setupGameControls, updateGameLayout } from "./view";
+import { buildGrid, buildHeader, setupGameControls, updateGameLayout, updateTimerSeconds } from "./view";
 
 /* ==========================================================================
    INITIALIZATION OF GAME
@@ -13,6 +13,7 @@ import { buildGrid, buildHeader, setupGameControls, updateGameLayout } from "./v
 export function initGame(): void {
   const grid = document.getElementById("memory-grid");
   const header = document.querySelector(".game__header");
+
   if (!grid || !header) return;
 
   resetState();
@@ -20,6 +21,7 @@ export function initGame(): void {
   setupGameControls(header, handleExitConfirmation, handleRestartGame);
   buildGrid(grid, handleCardClick);
   updateGameLayout();
+  startTurnTimer();
 }
 
 /* ==========================================================================
@@ -41,6 +43,7 @@ function resetState(): void {
  * @description  Handles the exit confirmation by resetting the game state, applying the default theme, and showing the match setup screen.
  */
 function handleExitConfirmation(): void {
+  stopTurnTimer();
   resetState();
   document.body.dataset.theme = "magenta-rush";
   showMatchSetupScreen();
@@ -61,6 +64,7 @@ function handleRestartGame(): void {
  */
 function applyMatchState(first: HTMLElement, second: HTMLElement): void {
   const playerClass = `card--matched-${gameState.currentPlayer}`;
+
   first.classList.add("is-matched", playerClass);
   second.classList.add("is-matched", playerClass);
 
@@ -85,7 +89,10 @@ function handleMatch(first: HTMLElement, second: HTMLElement): void {
   updateGameLayout();
 
   if (gameState.matchedPairs === gameState.boardSize / 2) {
+    stopTurnTimer(); // <-- HIER: Timer stoppen, das Spiel ist vorbei!
     finishGame();
+  } else {
+    startTurnTimer(); // <-- HIER: Frische 30s für das nächste Pärchen!
   }
 }
 
@@ -104,6 +111,7 @@ function handleMismatch(first: HTMLElement, second: HTMLElement): void {
     gameState.isLocked = false;
 
     updateGameLayout();
+    startTurnTimer();
   }, 1000);
 }
 
@@ -148,4 +156,63 @@ function handleCardClick(card: HTMLElement): void {
     gameState.isLocked = true;
     checkMatch();
   }
+}
+
+/* ==========================================================================
+  TURN TIMER LOGIC
+   ========================================================================== */
+
+const TURN_TIME_LIMIT = 10;
+let timerIntervalId: number | null = null;
+let currentSecondsLeft = TURN_TIME_LIMIT;
+
+/**
+ * @description Starts the turn timer, updating the countdown display every second and handling timeout when the timer reaches zero.
+ */
+function startTurnTimer(): void {
+  stopTurnTimer();
+  currentSecondsLeft = TURN_TIME_LIMIT;
+  updateTimerSeconds(currentSecondsLeft);
+
+  timerIntervalId = window.setInterval(() => {
+    currentSecondsLeft--;
+    updateTimerSeconds(currentSecondsLeft);
+
+    if (currentSecondsLeft <= 0) {
+      stopTurnTimer();
+      handleTimeOut();
+    }
+  }, 1000);
+}
+
+/**
+ * @description Stops the turn timer by clearing the interval and resetting the timer ID.
+ * @export
+ */
+export function stopTurnTimer(): void {
+  if (timerIntervalId !== null) {
+    clearInterval(timerIntervalId);
+    timerIntervalId = null;
+  }
+}
+
+/**
+ * @description Handles the logic when the turn timer runs out, resetting flipped cards, switching the current player, and updating the game layout.
+ */
+function handleTimeOut(): void {
+  resetFlippedCards();
+  gameState.currentPlayer = gameState.currentPlayer === "player-1" ? "player-2" : "player-1";
+  updateGameLayout();
+  startTurnTimer();
+}
+
+/**
+ * @description Resets the flipped cards by removing the "is-flipped" class from each card, clearing the flipped cards array, and unlocking the game state.
+ */
+function resetFlippedCards(): void {
+  gameState.flippedCards.forEach((card) => {
+    card.classList.remove("is-flipped");
+  });
+  gameState.flippedCards = [];
+  gameState.isLocked = false;
 }
