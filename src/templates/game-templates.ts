@@ -15,6 +15,7 @@ export function createHeaderTemplate(data: HeaderTemplateData): string {
   return `
     <div class="game__status">
       <button id="btn-goto-setup" class="btn btn--small btn--outline" type="button">MENU</button>
+      <h2 class="game__title">Chunky<br>Pairs</h2>
       <button id="btn-restart-game" class="btn btn--small btn--outline" type="button">RESTART</button>
     </div>
   `;
