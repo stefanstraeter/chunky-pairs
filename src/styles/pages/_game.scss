@@ -36,7 +36,7 @@
     background-color: #ffffff;
     border: v.$retro-border-thin;
     border-radius: v.$retro-radius-lg;
-    box-shadow: 0px 16px 0px #000000; // Fetter, brutaler Bodenschatten
+    box-shadow: v.$retro-shadow-lg;
     padding: v.$spacing-2xl;
     position: relative; // Wichtig für absolut zentrierten Timer unten
     z-index: 2;
@@ -48,7 +48,7 @@
   background-color: #ffffff;
   border: v.$retro-border-thin;
   border-radius: v.$retro-radius-sm;
-  box-shadow: 0px 8px 0px #000000;
+  box-shadow: v.$retro-shadow-sm;
   padding: v.$spacing-xl v.$spacing-l;
   @include m.flex-center(column, center);
   width: 140px;
@@ -104,12 +104,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    z-index: 1; // Liegt ganz unten innerhalb des Tunnels
-
-    // Brutalistischer Tipp: Falls dein SVG noch keinen Schatten hat,
-    // kannst du ihm hier einen knackigen Drop-Shadow verpassen!
-    filter: drop-shadow(0px 6px 0px #000000);
+    z-index: 1;
   }
 
   // ── DER TEXT ÜBER DEM SVG ───────────────────────
