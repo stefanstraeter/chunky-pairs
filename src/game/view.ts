@@ -1,12 +1,19 @@
 import { gameState } from "../state";
-import { createCardTemplate, createHeaderTemplate } from "../templates/game-templates";
+import { createCardTemplate, createHeaderTemplate, createModalTemplate } from "../templates/game-templates";
 import { createCardValues } from "./helpers";
 import { assetPath } from "../assets";
 
 /* ==========================================================================
-  GAME CONTROLS
+  PUBLIC API / EXPORTS
   ========================================================================== */
 
+/**
+ * @description Sets up the game controls by adding event listeners to the menu and restart buttons, triggering the provided callback functions when clicked.
+ * @export
+ * @param {Element} screen - The screen element containing the game controls.
+ * @param {() => void} onBackToSetup - The callback function to be called when the menu button is clicked.
+ * @param {() => void} onRestart - The callback function to be called when the restart button is clicked.
+ */
 export function setupGameControls(screen: Element, onBackToSetup: () => void, onRestart: () => void): void {
   const menuButton = screen.querySelector<HTMLButtonElement>("#btn-goto-setup");
   const restartButton = screen.querySelector<HTMLButtonElement>("#btn-restart-game");
@@ -15,10 +22,6 @@ export function setupGameControls(screen: Element, onBackToSetup: () => void, on
   restartButton?.addEventListener("click", onRestart);
 }
 
-/* ==========================================================================
-  GAME BOARD BUILDERS
-  ========================================================================== */
-
 /**
  * @description Builds the game header by setting its inner HTML using the createHeaderTemplate function and the current game state.
  * @export
@@ -26,23 +29,6 @@ export function setupGameControls(screen: Element, onBackToSetup: () => void, on
  */
 export function buildHeader(header: Element): void {
   header.innerHTML = createHeaderTemplate();
-}
-
-/**
- * @description Creates a card element with the given card name and click handler.
- * @param {string} cardName - The name of the card.
- * @param {(card: HTMLElement) => void} onCardClick - The function to be called when the card is clicked.
- * @return {HTMLButtonElement} The created card button element.
- */
-function createCard(cardName: string, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
-  const card = document.createElement("button");
-
-  card.className = "card";
-  card.dataset.value = cardName;
-  card.innerHTML = createCardTemplate(cardName);
-  card.addEventListener("click", () => onCardClick(card));
-
-  return card;
 }
 
 /**
@@ -60,10 +46,6 @@ export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) =>
   cardValues.forEach((cardName) => grid.appendChild(createCard(cardName, onCardClick)));
 }
 
-/* ==========================================================================
-   UPDATES GAME LAYOUT
-   ========================================================================== */
-
 /**
  * @description Updates the game layout by refreshing the score display, active player cards, and timer widget based on the current game state.
  * @export
@@ -72,6 +54,70 @@ export function updateGameLayout(): void {
   updateScoreDisplay();
   updateActivePlayerCards();
   updateTimerBackground();
+}
+
+/**
+ * @description Updates the turn timer countdown display with the given number of seconds.
+ * @export
+ * @param {number} seconds
+ */
+export function updateTimerSeconds(seconds: number): void {
+  const countdownEl = document.getElementById("turn-timer-countdown");
+
+  if (countdownEl) {
+    countdownEl.textContent = `${seconds}s`;
+  }
+}
+
+/**
+ * @description Opens a dynamic confirmation modal.
+ * @param {string} title - The title of the modal.
+ * @param {string} message - The message content of the modal.
+ * @param {() => void} onConfirm - Callback function when the user clicks "Yes".
+ * @param {() => void} onCancel - Callback function when the user clicks "No" or closes the modal.
+ */
+export function showConfirmationModal(title: string, message: string, onConfirm: () => void, onCancel: () => void): void {
+  const container = document.getElementById("exit-modal-container");
+  if (!container) return;
+
+  container.innerHTML = createModalTemplate(title, message, "Yes", "Never");
+
+  const confirmBtn = document.getElementById("modal-btn-confirm");
+  const cancelBtn = document.getElementById("modal-btn-cancel");
+  const closeModal = () => {
+    container.innerHTML = "";
+  };
+
+  confirmBtn?.addEventListener("click", () => {
+    closeModal();
+    onConfirm();
+  });
+
+  cancelBtn?.addEventListener("click", () => {
+    closeModal();
+    onCancel();
+  });
+}
+
+/* ==========================================================================
+   INTERNAL HELPER FUNCTIONS
+   ========================================================================== */
+
+/**
+ * @description Creates a card element with the given card name and click handler.
+ * @param {string} cardName - The name of the card.
+ * @param {(card: HTMLElement) => void} onCardClick - The function to be called when the card is clicked.
+ * @return {HTMLButtonElement} The created card button element.
+ */
+function createCard(cardName: string, onCardClick: (card: HTMLElement) => void): HTMLButtonElement {
+  const card = document.createElement("button");
+
+  card.className = "card";
+  card.dataset.value = cardName;
+  card.innerHTML = createCardTemplate(cardName);
+  card.addEventListener("click", () => onCardClick(card));
+
+  return card;
 }
 
 /**
@@ -112,21 +158,7 @@ function updateTimerBackground(): void {
   if (turnLabel) {
     turnLabel.textContent = isP1 ? "PLAYER 1'S TURN" : "PLAYER 2'S TURN";
   }
-
   if (timerBg) {
     timerBg.src = isP1 ? assetPath("img/00_general/turn-background-red.svg") : assetPath("img/00_general/turn-background-orange.svg");
-  }
-}
-
-/**
- * @description Updates the turn timer countdown display with the given number of seconds.
- * @export
- * @param {number} seconds
- */
-export function updateTimerSeconds(seconds: number): void {
-  const countdownEl = document.getElementById("turn-timer-countdown");
-
-  if (countdownEl) {
-    countdownEl.textContent = `${seconds}s`;
   }
 }
