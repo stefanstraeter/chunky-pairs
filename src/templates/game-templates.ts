@@ -19,21 +19,13 @@ export function createHeaderTemplate(): string {
   `;
 }
 
-/**
- * Creates a single memory card template.
- *
- * @param cardValue - Card face id.
- * @param themeFolder - Theme asset folder name.
- * @returns Card HTML string.
- */
-export function createCardTemplate(cardValue: number, themeFolder: string): string {
+export function createCardTemplate(cardName: string): string {
   return `
     <div class="card__inner">
-      <div class="card__front">
-        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card_background.png`)}" alt="Card background">
-      </div>
+      <div class="card__front"></div>
+      
       <div class="card__back">
-        <img src="${assetPath(`/img/01_themes/${themeFolder}/cards/card${cardValue}.png`)}" alt="Card ${cardValue}">
+        <img src="${assetPath(`/img/01_cards/${cardName}.png`)}" alt="${cardName} icon">
       </div>
     </div>
   `;
