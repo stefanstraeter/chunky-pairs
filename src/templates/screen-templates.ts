@@ -132,7 +132,7 @@ export function createGameScreenTemplate(): string {
             <img id="turn-timer-bg" class="turn-timer__bg" src="${assetPath("img/00_general/turn-background-red.svg")}" alt="">
             <div class="turn-timer__content">
               <span id="turn-timer-label" class="turn-timer__player">PLAYER 1'S TURN</span>
-              <span id="turn-timer-countdown" class="turn-timer__time">5s</span>
+              <span id="turn-timer-countdown" class="turn-timer__time">10s</span>
             </div>
           </div>
         </div>
