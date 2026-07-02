@@ -1,10 +1,6 @@
 import { gameState } from "../state";
-import { getWinner } from "./helpers";
-import { showMatchSetupScreen, showWinnerScreen, showDrawScreen, renderScreen } from "../ui/navigation";
-import { buildGrid, buildHeader, setupExitModal, updateDrawScreen, updateGameOverScreen, updateHeader, updateWinnerScreen } from "./view";
-import { createGameOverScreenTemplate } from "../templates/screen-templates";
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { showMatchSetupScreen } from "../ui/navigation";
+import { buildGrid, buildHeader, setupGameControls, updateHeader } from "./view";
 
 /* ==========================================================================
    SETUP & EXIT FUNCTIONS
@@ -15,7 +11,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
  */
 function resetState(): void {
   gameState.currentPlayer = gameState.player;
-  gameState.scores = { blue: 0, orange: 0 };
+  gameState.scores = { "player-1": 0, "player-2": 0 };
   gameState.flippedCards = [];
   gameState.matchedPairs = 0;
   gameState.isLocked = false;
@@ -28,6 +24,10 @@ function handleExitConfirmation(): void {
   resetState();
   document.body.dataset.theme = "magenta-rush";
   showMatchSetupScreen();
+}
+
+function handleRestartGame(): void {
+  initGame();
 }
 
 /* ==========================================================================
@@ -50,31 +50,9 @@ function applyMatchState(first: HTMLElement, second: HTMLElement): void {
   gameState.isLocked = false;
 }
 
-/**
- * @description Determines the winner of the game and updates the final result screen accordingly, showing either the winner or a draw message.
- */
-function showFinalResultScreen(): void {
-  const winner = getWinner();
-  if (winner === "draw") {
-    showDrawScreen();
-    updateDrawScreen();
-  } else {
-    showWinnerScreen();
-    updateWinnerScreen(winner);
-  }
-}
-
-/**
- * @description Runs the end-of-game sequence by showing the game over screen, updating it, and then showing the final result screen after a delay.
- * @return {Promise<void>} A promise that resolves after the end-of-game sequence is completed.
- */
-async function runEndOfGameSequence(): Promise<void> {
-  await delay(1500);
-  renderScreen(createGameOverScreenTemplate());
-  updateGameOverScreen();
-
-  await delay(3000);
-  showFinalResultScreen();
+function finishGame(): void {
+  gameState.flippedCards = [];
+  gameState.isLocked = true;
 }
 
 /**
@@ -87,7 +65,7 @@ function handleMatch(first: HTMLElement, second: HTMLElement): void {
   updateHeader();
 
   if (gameState.matchedPairs === gameState.boardSize / 2) {
-    runEndOfGameSequence();
+    finishGame();
   }
 }
 
@@ -102,7 +80,7 @@ function handleMismatch(first: HTMLElement, second: HTMLElement): void {
     second.classList.remove("is-flipped");
 
     gameState.flippedCards = [];
-    gameState.currentPlayer = gameState.currentPlayer === "blue" ? "orange" : "blue";
+    gameState.currentPlayer = gameState.currentPlayer === "player-1" ? "player-2" : "player-1";
     gameState.isLocked = false;
 
     updateHeader();
@@ -167,6 +145,7 @@ export function initGame(): void {
 
   resetState();
   buildHeader(header);
-  setupExitModal(header, handleExitConfirmation);
+  setupGameControls(header, handleExitConfirmation, handleRestartGame);
   buildGrid(grid, handleCardClick);
+  updateHeader();
 }
