@@ -55,7 +55,7 @@
   box-shadow: v.$retro-shadow-sm;
   padding: v.$spacing-xl v.$spacing-l;
   @include m.flex-center(column, center);
-  width: 9.5rem;
+  width: 8rem;
   position: relative;
   z-index: 3;
 
@@ -90,11 +90,11 @@
 
 .turn-timer {
   position: absolute;
-  bottom: -5.625rem;
+  bottom: -6rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 10rem;
-  height: 7.5rem;
+  width: 11rem;
+  height: 7.8rem;
   @include m.flex-center(column, center);
   z-index: 10;
 
@@ -118,14 +118,14 @@
 
   &__player {
     font-family: v.$font-tanker;
-    font-size: v.$font-size-sm;
+    font-size: v.$font-size-md;
     color: v.$color-text-light;
     letter-spacing: v.$letter-spacing-wide;
   }
 
   &__time {
     font-family: v.$font-tanker;
-    font-size: v.$font-size-2xl;
+    font-size: v.$font-size-3xl;
     color: v.$color-text-light;
     line-height: 1;
   }
