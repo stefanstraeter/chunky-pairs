@@ -9,7 +9,6 @@
   width: 100%;
   border: v.$retro-border-thin;
   border-radius: v.$retro-radius-sm;
-  box-shadow: v.$retro-shadow-lg;
   transition:
     transform 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.06s cubic-bezier(0.175, 0.885, 0.32, 1.275),
@@ -34,13 +33,25 @@
     font-size: v.$font-size-2xl;
     padding: v.$spacing-m v.$spacing-l;
     letter-spacing: v.$letter-spacing-wide;
+    box-shadow: v.$retro-shadow-lg;
+
+    &:active {
+      transform: translateY(0.375rem);
+      box-shadow: 0rem 0.1rem 0rem #000000;
+    }
   }
 
   &--small {
     font-size: v.$font-size-md;
     padding: v.$spacing-s v.$spacing-m;
+    box-shadow: v.$retro-shadow-sm;
     min-width: 8rem;
     width: auto;
+
+    &:active {
+      transform: translateY(0.1875rem);
+      box-shadow: 0rem 0.0625rem 0rem #000000;
+    }
   }
 
   &__smile {
@@ -55,10 +66,5 @@
       transform: translateX(8px) scale(1.15) rotate(12deg);
       scale: calc(1.1);
     }
-  }
-
-  &:active {
-    transform: translateY(0.375rem);
-    box-shadow: 0rem 0.1rem 0rem #000000;
   }
 }
