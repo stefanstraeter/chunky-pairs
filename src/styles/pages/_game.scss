@@ -2,7 +2,8 @@
 @use "../abstracts/mixins" as m;
 
 .game {
-  @include m.flex-center(column, center);
+  @include m.flex-center(column, start);
+  gap: v.$spacing-xl;
   padding: v.$spacing-xl v.$spacing-3xl;
   min-height: 100vh;
   position: relative;
@@ -14,12 +15,17 @@
   }
 
   &__status {
-    @include m.flex-center(row, space-evenly);
-    gap: v.$spacing-xl;
+    @include m.flex-center(row, center);
+    gap: v.$spacing-4xl;
     width: 100%;
   }
 
-  // ── DAS DREI-SPALTEN-LAYOUT ──────────────────
+  &__title {
+    font-family: v.$font-tanker;
+    color: v.$color-text-light;
+    text-align: center;
+  }
+
   &__main-layout {
     display: grid;
     gap: v.$spacing-3xl;
@@ -27,33 +33,31 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1000px;
+    max-width: 62.5rem;
     margin: 0 auto;
   }
 
-  // Das weiße Gehäuse des Spielfelds
   &__board {
-    background-color: #ffffff;
+    background-color: v.$color-bg-cream;
     border: v.$retro-border-thin;
     border-radius: v.$retro-radius-lg;
     box-shadow: v.$retro-shadow-lg;
     padding: v.$spacing-2xl;
-    position: relative; // Wichtig für absolut zentrierten Timer unten
+    position: relative;
     z-index: 2;
   }
 }
 
-// ── PLAYER SCORE CARDS ─────────────────────────
 .player-card {
-  background-color: #ffffff;
+  background-color: v.$color-bg-cream;
   border: v.$retro-border-thin;
   border-radius: v.$retro-radius-sm;
   box-shadow: v.$retro-shadow-sm;
   padding: v.$spacing-xl v.$spacing-l;
   @include m.flex-center(column, center);
-  width: 140px;
+  width: 9.5rem;
   position: relative;
-  z-index: 3; // Liegt über dem Board-Schatten
+  z-index: 3;
 
   &--1 {
     justify-self: end;
@@ -66,38 +70,34 @@
   &__avatar {
     width: 3rem;
     position: absolute;
-    top: -20px;
+    top: -1.5rem;
   }
 
   &__label {
     font-family: v.$font-tanker;
     font-size: v.$font-size-md;
-    color: #000000;
+    color: v.$color-text-dark;
     margin-top: v.$spacing-s;
   }
 
   &__score {
     font-family: v.$font-tanker;
-    font-size: v.$font-size-3xl; // Riesige fette Zahl
-    color: #000000;
+    font-size: v.$font-size-3xl;
+    color: v.$color-text-dark;
     line-height: 1;
   }
 }
 
 .turn-timer {
   position: absolute;
-  bottom: -90px; // Schaut unten aus dem weißen Kasten heraus (Wert eventuell an SVG-Größe anpassen)
+  bottom: -5.625rem;
   left: 50%;
-  transform: translateX(-50%); // Perfekt horizontal zentriert
-
-  // Die Box passt sich exakt der Größe deines SVGs an
-  width: 160px; // Passe das an die reale Breite deines SVGs an
-  height: 120px; // Passe das an die reale Höhe deines SVGs an
-
+  transform: translateX(-50%);
+  width: 10rem;
+  height: 7.5rem;
   @include m.flex-center(column, center);
   z-index: 10;
 
-  // ── DAS HINTERGRUND-SVG ─────────────────────────
   &__bg {
     position: absolute;
     top: 0;
@@ -107,49 +107,45 @@
     z-index: 1;
   }
 
-  // ── DER TEXT ÜBER DEM SVG ───────────────────────
   &__content {
     position: relative;
-    z-index: 2; // Liegt über dem SVG!
+    z-index: 2;
     @include m.flex-center(column, center);
     text-align: center;
     width: 100%;
-    // Falls der Text wegen der Pfeil-Krone des SVGs zu hoch sitzt,
-    // kannst du ihn hier mit ein bisschen Padding nach unten drücken:
     padding-top: v.$spacing-m;
   }
 
   &__player {
     font-family: v.$font-tanker;
-    font-size: v.$font-size-xs;
-    color: #ffffff; // Oder #000000, falls Player 2 (Orange) dunklen Text braucht
+    font-size: v.$font-size-sm;
+    color: v.$color-text-light;
     letter-spacing: v.$letter-spacing-wide;
   }
 
   &__time {
     font-family: v.$font-tanker;
     font-size: v.$font-size-2xl;
-    color: #ffffff;
+    color: v.$color-text-light;
     line-height: 1;
   }
 }
 
-// ── MEMORY CARDS GRID ─────────────────────────
 .game-board__grid {
   display: grid;
   gap: v.$spacing-m;
   justify-content: center;
 
   &.grid--16 {
-    grid-template-columns: repeat(4, 90px);
-    grid-template-rows: repeat(4, 90px);
+    grid-template-columns: repeat(4, 6rem);
+    grid-template-rows: repeat(4, 6rem);
   }
   &.grid--24 {
-    grid-template-columns: repeat(6, 80px);
-    grid-template-rows: repeat(4, 80px);
+    grid-template-columns: repeat(6, 6rem);
+    grid-template-rows: repeat(4, 6rem);
   }
   &.grid--36 {
-    grid-template-columns: repeat(6, 80px);
-    grid-template-rows: repeat(6, 80px);
+    grid-template-columns: repeat(6, 4rem);
+    grid-template-rows: repeat(6, 4rem);
   }
 }
