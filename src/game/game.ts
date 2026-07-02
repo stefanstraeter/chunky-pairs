@@ -1,6 +1,26 @@
 import { gameState } from "../state";
 import { showMatchSetupScreen } from "../ui/navigation";
-import { buildGrid, buildHeader, setupGameControls, updateHeader } from "./view";
+import { buildGrid, buildHeader, setupGameControls, updateGameLayout } from "./view";
+
+/* ==========================================================================
+   INITIALIZATION OF GAME
+   ========================================================================== */
+
+/**
+ * @description Initializes the game by setting up the grid, header, and exit modal, and resetting the game state.
+ * @export
+ */
+export function initGame(): void {
+  const grid = document.getElementById("memory-grid");
+  const header = document.querySelector(".game__header");
+  if (!grid || !header) return;
+
+  resetState();
+  buildHeader(header);
+  setupGameControls(header, handleExitConfirmation, handleRestartGame);
+  buildGrid(grid, handleCardClick);
+  updateGameLayout();
+}
 
 /* ==========================================================================
    SETUP & EXIT FUNCTIONS
@@ -62,7 +82,7 @@ function finishGame(): void {
  */
 function handleMatch(first: HTMLElement, second: HTMLElement): void {
   applyMatchState(first, second);
-  updateHeader();
+  updateGameLayout();
 
   if (gameState.matchedPairs === gameState.boardSize / 2) {
     finishGame();
@@ -83,7 +103,7 @@ function handleMismatch(first: HTMLElement, second: HTMLElement): void {
     gameState.currentPlayer = gameState.currentPlayer === "player-1" ? "player-2" : "player-1";
     gameState.isLocked = false;
 
-    updateHeader();
+    updateGameLayout();
   }, 1000);
 }
 
@@ -128,24 +148,4 @@ function handleCardClick(card: HTMLElement): void {
     gameState.isLocked = true;
     checkMatch();
   }
-}
-
-/* ==========================================================================
-   INITIALIZATION
-   ========================================================================== */
-
-/**
- * @description Initializes the game by setting up the grid, header, and exit modal, and resetting the game state.
- * @export
- */
-export function initGame(): void {
-  const grid = document.getElementById("memory-grid");
-  const header = document.querySelector(".game__header");
-  if (!grid || !header) return;
-
-  resetState();
-  buildHeader(header);
-  setupGameControls(header, handleExitConfirmation, handleRestartGame);
-  buildGrid(grid, handleCardClick);
-  updateHeader();
 }
