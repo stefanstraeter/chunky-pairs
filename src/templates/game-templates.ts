@@ -1,5 +1,4 @@
 import { assetPath } from "../assets";
-import type { HeaderTemplateData } from "../types";
 
 /* ==========================================================================
     TEMPLATE FACTORIES
@@ -8,10 +7,9 @@ import type { HeaderTemplateData } from "../types";
 /**
  * Creates the game header and embedded exit modal markup.
  *
- * @param data - Template values for icons, labels, and button text.
  * @returns Header HTML string.
  */
-export function createHeaderTemplate(data: HeaderTemplateData): string {
+export function createHeaderTemplate(): string {
   return `
     <div class="game__status">
       <button id="btn-goto-setup" class="btn btn--small btn--outline" type="button">MENU</button>
