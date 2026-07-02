@@ -20,7 +20,7 @@ const CARD_NAMES = [
 ];
 
 /* ==========================================================================
-   PURE LOGIC & GAME MECHANICS HELPERS
+    UTILITY FUNCTIONS
    ========================================================================== */
 
 /**
@@ -33,7 +33,6 @@ export function createCardValues(boardSize: number): string[] {
   const numberOfPairs = boardSize / 2;
   const selectedUniqueNames = CARD_NAMES.slice(0, numberOfPairs);
   const deck = [...selectedUniqueNames, ...selectedUniqueNames];
-
   return shuffle(deck);
 }
 
@@ -48,6 +47,14 @@ function shuffle(array: string[]): string[] {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-
   return arr;
 }
+
+/**
+ * @description Toggles the current player between "player-1" and "player-2".
+ * @param {("player-1" | "player-2")} currentPlayer
+ * @return {("player-1" | "player-2")}
+ */
+export const togglePlayer = (currentPlayer: "player-1" | "player-2"): "player-1" | "player-2" => {
+  return currentPlayer === "player-1" ? "player-2" : "player-1";
+};
