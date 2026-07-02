@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="54px" height="59px" viewBox="0 0 54 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>player-one</title>
-    <g id="Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="player-one">
-            <circle id="Oval-Copy-21" fill="#000000" cx="27" cy="27" r="27"></circle>
-            <circle id="Oval-Copy-40" fill="#000000" cx="27" cy="32" r="27"></circle>
-            <circle id="Oval-Copy-11" fill="#FD6687" cx="27" cy="27" r="24"></circle>
-            <g id="Group-8" transform="translate(19.000000, 17.000000)" stroke="#000000" stroke-width="3">
-                <path d="M6,26.75 C12.627417,26.75 18,21.377417 18,14.75 C18,8.122583 12.627417,2.75 6,2.75" id="Oval-Copy-11" transform="translate(12.000000, 14.750000) rotate(90.000000) translate(-12.000000, -14.750000) "></path>
-                <g id="Group-7" transform="translate(9.750000, 0.000000)">
-                    <line x1="0.5" y1="0" x2="0.5" y2="5.9844035" id="Path"></line>
-                    <line x1="10.5" y1="0" x2="10.5" y2="5.9844035" id="Path-Copy"></line>
-                </g>
-            </g>
-        </g>
-    </g>
+<svg width="54" height="59" viewBox="0 0 54 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_4_7)">
+<path d="M27 54C41.9117 54 54 41.9117 54 27C54 12.0883 41.9117 0 27 0C12.0883 0 0 12.0883 0 27C0 41.9117 12.0883 54 27 54Z" fill="black"/>
+<path d="M27 59C41.9117 59 54 46.9117 54 32C54 17.0883 41.9117 5 27 5C12.0883 5 0 17.0883 0 32C0 46.9117 12.0883 59 27 59Z" fill="black"/>
+<path d="M27 51C40.2548 51 51 40.2548 51 27C51 13.7452 40.2548 3 27 3C13.7452 3 3 13.7452 3 27C3 40.2548 13.7452 51 27 51Z" fill="#FC1C50"/>
+<path d="M19 25.75C19 32.3774 24.3726 37.75 31 37.75C37.6274 37.75 43 32.3774 43 25.75" stroke="black" stroke-width="3"/>
+<path d="M29.25 17V22.9844" stroke="black" stroke-width="3"/>
+<path d="M39.25 17V22.9844" stroke="black" stroke-width="3"/>
+</g>
+<defs>
+<clipPath id="clip0_4_7">
+<rect width="54" height="59" fill="white"/>
+</clipPath>
+</defs>
 </svg>
