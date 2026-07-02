@@ -1,62 +1,17 @@
 import { gameState } from "../state";
 import { createCardTemplate, createHeaderTemplate } from "../templates/game-templates";
-import type { ExitModalElements, Winner } from "../types";
-import { createCardValues, getDrawIcon, getPlayerIcon, getThemeFolder, getWinnerIcon, getWinnerLabel } from "./helpers";
+import { createCardValues, getThemeFolder } from "./helpers";
 
 /* ==========================================================================
-  EXIT MODAL HELPERS
+  GAME CONTROLS
   ========================================================================== */
 
-/**
- * @description Retrieves the elements related to the exit modal from the header.
- * @param {Element} header - The header element containing the exit modal elements.
- * @return {ExitModalElements | null} - An object containing the exit button, modal, back button, and confirm button elements, or null if any of the elements are not found.
- */
-function getExitModalElements(header: Element): ExitModalElements | null {
-  const exitBtn = header.querySelector<HTMLButtonElement>("#btn-exit-game");
-  const modal = header.querySelector<HTMLElement>("#exit-game-modal");
-  const backBtn = header.querySelector<HTMLButtonElement>("#btn-back-to-game");
-  const confirmBtn = header.querySelector<HTMLButtonElement>("#btn-confirm-exit");
+export function setupGameControls(screen: Element, onBackToSetup: () => void, onRestart: () => void): void {
+  const menuButton = screen.querySelector<HTMLButtonElement>("#btn-goto-setup");
+  const restartButton = screen.querySelector<HTMLButtonElement>("#btn-restart-game");
 
-  if (!exitBtn || !modal || !backBtn || !confirmBtn) return null;
-  return { exitBtn, modal, backBtn, confirmBtn };
-}
-
-/**
- * @description Opens the exit modal by adding the 'is-open' class and setting the 'aria-hidden' attribute to 'false'.
- * @param {HTMLElement} modal
- */
-function openExitModal(modal: HTMLElement): void {
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-}
-
-/**
- * @description Closes the exit modal by removing the 'is-open' class and setting the 'aria-hidden' attribute to 'true'.
- * @param {HTMLElement} modal - The exit modal element to be closed.
- */
-function closeExitModal(modal: HTMLElement): void {
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-}
-
-/**
- * @description Sets up the exit modal functionality by attaching event listeners to the exit, back, and confirm buttons.
- * @export
- * @param {Element} header - The header element containing the exit modal elements.
- */
-export function setupExitModal(header: Element, onExitConfirmed: () => void): void {
-  const elements = getExitModalElements(header);
-  if (!elements) return;
-
-  const { exitBtn, modal, backBtn, confirmBtn } = elements;
-  exitBtn.addEventListener("click", () => openExitModal(modal));
-  backBtn.addEventListener("click", () => closeExitModal(modal));
-  confirmBtn.addEventListener("click", () => {
-    closeExitModal(modal);
-    onExitConfirmed();
-  });
-  modal.addEventListener("click", (e) => e.target === modal && closeExitModal(modal));
+  menuButton?.addEventListener("click", onBackToSetup);
+  restartButton?.addEventListener("click", onRestart);
 }
 
 /* ==========================================================================
@@ -69,16 +24,7 @@ export function setupExitModal(header: Element, onExitConfirmed: () => void): vo
  * @param {Element} header - The header element to be built.
  */
 export function buildHeader(header: Element): void {
-  const isElectricBlue = gameState.theme === "electric-blue";
-  header.innerHTML = createHeaderTemplate({
-    showColorLabels: !isElectricBlue,
-    backButtonText: isElectricBlue ? "No, back to game" : "Back to game",
-    exitButtonText: isElectricBlue ? "Yes, quit game" : "Exit game",
-    blueIcon: getPlayerIcon("blue"),
-    orangeIcon: getPlayerIcon("orange"),
-    currentPlayerIcon: getPlayerIcon(gameState.player),
-    currentPlayerAlt: gameState.player,
-  });
+  header.innerHTML = createHeaderTemplate();
 }
 
 /**
@@ -117,100 +63,13 @@ export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) =>
  * @export
  */
 export function updateHeader(): void {
-  const scoreBlue = document.querySelector(".score--blue .score__value");
-  const scoreOrange = document.querySelector(".score--orange .score__value");
-  const indicator = document.querySelector<HTMLImageElement>(".current-indicator");
+  const scorePlayerOne = document.getElementById("score-player-1");
+  const scorePlayerTwo = document.getElementById("score-player-2");
+  const turnLabel = document.getElementById("turn-timer-label");
 
-  if (scoreBlue) scoreBlue.textContent = `${gameState.scores.blue}`;
-  if (scoreOrange) scoreOrange.textContent = `${gameState.scores.orange}`;
-  if (indicator) {
-    indicator.src = getPlayerIcon(gameState.currentPlayer);
-    indicator.alt = gameState.currentPlayer;
-  }
-}
-/**
- * @description Updates the game over screen by setting the icons and scores for both players based on the current game state, and updating the labels according to the theme.
- * @export
- */
-export function updateGameOverScreen(): void {
-  const blueIcon = document.getElementById("gameover-blue-icon") as HTMLImageElement | null;
-  const orangeIcon = document.getElementById("gameover-orange-icon") as HTMLImageElement | null;
-  const blueScore = document.getElementById("gameover-blue-score");
-  const orangeScore = document.getElementById("gameover-orange-score");
-
-  if (blueIcon) blueIcon.src = getPlayerIcon("blue");
-  if (orangeIcon) orangeIcon.src = getPlayerIcon("orange");
-  if (blueScore) blueScore.textContent = `${gameState.scores.blue}`;
-  if (orangeScore) orangeScore.textContent = `${gameState.scores.orange}`;
-
-  updateGameOverLabels();
-}
-
-/**
- * @description Updates the game over labels by showing or hiding the player labels based on the current theme of the game. If the theme is 'electric-blue', the labels will be hidden; otherwise, they will be shown.
- * @export
- */
-function updateGameOverLabels(): void {
-  const blueLabel = document.getElementById("gameover-blue-label");
-  const orangeLabel = document.getElementById("gameover-orange-label");
-  const showLabels = gameState.theme !== "electric-blue";
-
-  if (blueLabel) blueLabel.textContent = showLabels ? "Blue " : "";
-  if (orangeLabel) orangeLabel.textContent = showLabels ? "Orange " : "";
-}
-
-/**
- * @description Updates the winner screen by setting the winner's name and icon based on the provided winner parameter, and updating the back button text according to the current theme of the game.
- * @export
- * @param {Exclude<Winner, 'draw'>} winner - The winner of the game, which can be either 'blue' or 'orange', but not 'draw'.
- */
-export function updateWinnerScreen(winner: Exclude<Winner, "draw">): void {
-  const screen = document.getElementById("screen-winner");
-  const winnerCard = document.querySelector<HTMLElement>(".winner__winner");
-  const winnerName = document.getElementById("winner-name");
-
-  if (!screen || !winnerName) return;
-
-  screen.dataset.winner = winner;
-  if (winnerCard) winnerCard.dataset.winner = winner;
-
-  winnerName.textContent = winner === "blue" ? "Blue player" : "Orange player";
-
-  updateWinnerAssets(winner);
-}
-
-/**
- * @description Updates the winner screen assets by setting the winner icon and back button text based on the provided winner parameter and the current theme of the game.
- * @param {Exclude<Winner, 'draw'>} winner - The winner of the game, which can be either 'blue' or 'orange', but not 'draw'.
- */
-function updateWinnerAssets(winner: Exclude<Winner, "draw">): void {
-  const icon = document.getElementById("winner-icon") as HTMLImageElement | null;
-  const btn = document.getElementById("btn-back-to-start-winner");
-  const isElectricBlue = gameState.theme === "electric-blue";
-
-  if (btn) {
-    btn.textContent = isElectricBlue ? "home" : "Back to start";
-  }
-  if (icon) {
-    icon.src = getWinnerIcon(winner);
-    icon.alt = isElectricBlue ? "Winner trophy" : winner;
-  }
-}
-
-/**
- * @description Updates the draw screen by setting the draw icon and back button text based on the current theme of the game.
- * @export
- */
-export function updateDrawScreen(): void {
-  const drawIcon = document.querySelector<HTMLImageElement>(".draw__icon");
-  const btn = document.getElementById("btn-back-to-start-draw");
-  const isElectricBlue = document.body.dataset.theme === "electric-blue";
-
-  if (drawIcon) {
-    drawIcon.src = getDrawIcon();
-    drawIcon.alt = "Draw icon";
-  }
-  if (btn) {
-    btn.textContent = isElectricBlue ? "home" : "Back to start";
+  if (scorePlayerOne) scorePlayerOne.textContent = `${gameState.scores["player-1"]}`;
+  if (scorePlayerTwo) scorePlayerTwo.textContent = `${gameState.scores["player-2"]}`;
+  if (turnLabel) {
+    turnLabel.textContent = gameState.currentPlayer === "player-1" ? "PLAYER 1'S TURN" : "PLAYER 2'S TURN";
   }
 }
