@@ -12,19 +12,19 @@ export function createResultScreenTemplate(result: "player-1" | "player-2" | "dr
   const { title, scoreText, smileySrc, themeClass } = getResultDetails(result, scoreP1, scoreP2);
 
   return `
-    <main class="game-screen end-screen ${themeClass}">
-      <div class="end-screen__content">
-        <h2 class="end-screen__title">${title}</h2>
+    <main class="result-screen screen ${themeClass}">
+      <div class="result-screen__content">
+        <h2 class="result-screen__title">${title}</h2>
         
-        <div class="end-screen__visual">
-          <img class="end-screen__smiley" src="${smileySrc}" alt="Game Over Smiley" />
+        <div class="result-screen__visual">
+          <img class="result-screen__smiley" src="${smileySrc}" alt="Game Over Smiley" />
         </div>
 
-        <p class="end-screen__score">${scoreText}</p>
+        <p class="result-screen__score">${scoreText}</p>
         
-        <div class="end-screen__actions">
-          <button id="end-btn-restart" class="btn--retro-lg">PLAY AGAIN</button>
-          <button id="end-btn-menu" class="btn--retro-lg btn--cancel">MAIN MENU</button>
+        <div class="result-screen__actions">
+          <button id="end-btn-restart" class="btn btn--primary btn--large">Restart</button>
+          <button id="end-btn-menu" class="btn btn--primary btn--large">Menu</button>
         </div>
       </div>
     </main>

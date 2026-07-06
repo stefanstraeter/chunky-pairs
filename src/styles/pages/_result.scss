@@ -1,56 +1,47 @@
-@use "../abstracts" as v;
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
 
-.end-screen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
-  padding: 2rem;
-  box-sizing: border-box;
+.result-screen {
+  @include m.flex-center(column, center);
+  padding: v.$spacing-l;
 
   &--p1 {
-    background-color: #1a2639; // Dunkelblau für Player 1
     .end-screen__title {
-      color: #2bb1ff;
-      text-shadow: 4px 4px 0px #000;
+      color: v.$color-bg-cream;
     }
   }
 
   &--p2 {
-    background-color: #2b1a0f; // Dunkelorange für Player 2
     .end-screen__title {
-      color: #f58e39;
-      text-shadow: 4px 4px 0px #000;
+      color: v.$color-bg-cream;
     }
   }
 
   &--draw {
-    background-color: #1f1f1f; // Brutalist-Grau für Draw
     .end-screen__title {
-      color: #a0a0a0;
-      text-shadow: 4px 4px 0px #000;
+      color: v.$color-bg-cream;
     }
   }
 
   &__content {
     text-align: center;
-    max-width: 600px;
     animation: endScreenPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.3);
   }
 
   &__title {
-    font-size: 3.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin: 0 0 1rem 0;
+    width: 100%;
+    background-color: v.$color-bg-cream;
+    text-align: center;
+    color: v.$color-text-dark;
+    padding: v.$spacing-l v.$spacing-xl;
+    border-radius: v.$retro-radius-lg;
+    border: v.$retro-border-thick;
+    box-shadow: v.$retro-shadow-lg;
   }
 
   &__visual {
-    margin: 2.5rem auto;
-    width: 150px;
-    height: 150px;
+    margin: v.$spacing-3xl auto;
+    height: 10rem;
   }
 
   &__smiley {
@@ -61,7 +52,7 @@
   }
 
   &__score {
-    font-size: 1.6rem;
+    font-size: v.$font-size-2xl;
     color: #fff;
     font-weight: bold;
     letter-spacing: 2px;
