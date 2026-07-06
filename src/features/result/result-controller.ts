@@ -1,8 +1,12 @@
 import { initGame } from "../game/game-controller";
-import { showMatchSetupScreen } from "../../ui/navigation";
+import { showMatchSetupScreen, startGameSequence } from "../../ui/navigation";
+
+/* ==========================================================================
+  INITIALIZATION OF RESULT SCREEN
+   ========================================================================== */
 
 /**
- * @description Initializes the end screen logic by mapping restart and menu actions.
+ * @description Initializes the result screen logic by mapping restart and menu actions.
  * @export
  */
 export function initResult(): void {
@@ -10,7 +14,7 @@ export function initResult(): void {
   const menuBtn = document.getElementById("end-btn-menu");
 
   restartBtn?.addEventListener("click", () => {
-    initGame();
+    startGameSequence();
   });
 
   menuBtn?.addEventListener("click", () => {
