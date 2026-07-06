@@ -1,14 +1,14 @@
 import { getEndScreenDetails } from "./result-helpers";
 
 /* ==========================================================================
-    ENDSCREEN TEMPLATE
+    RESULT SCREEN TEMPLATE
     ========================================================================== */
 
 /**
- * @description Creates the HTML template for the complete end screen overlay.
+ * @description Creates the HTML template for the complete result screen overlay.
  * @export
  */
-export function createEndScreenTemplate(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number): string {
+export function createResultScreenTemplate(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number): string {
   const { title, scoreText, smileySrc, themeClass } = getEndScreenDetails(result, scoreP1, scoreP2);
 
   return `
