@@ -147,3 +147,66 @@ export function createGameScreenTemplate(): string {
     </section>
   `;
 }
+
+/* ==========================================================================
+    ENDSCREEN
+    ========================================================================== */
+
+/**
+ * @description Internal helper to generate textual and visual details based on match results.
+ */
+function getEndScreenDetails(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number) {
+  const scoreText = `FINAL SCORE: ${scoreP1} - ${scoreP2}`;
+
+  if (result === "player-1") {
+    return {
+      title: "PLAYER 1 DOMINATES!",
+      scoreText,
+      smileySrc: assetPath("img/00_general/player-one.svg"),
+      themeClass: "end-screen--p1",
+    };
+  }
+
+  if (result === "player-2") {
+    return {
+      title: "PLAYER 2 DOMINATES!",
+      scoreText,
+      smileySrc: assetPath("img/00_general/player-two.svg"),
+      themeClass: "end-screen--p2",
+    };
+  }
+
+  return {
+    title: "PEACEFUL DRAW",
+    scoreText,
+    smileySrc: assetPath("img/00_general/players-draw.svg"), // Dein Unentschieden-Asset
+    themeClass: "end-screen--draw",
+  };
+}
+
+/**
+ * @description Creates the HTML template for the complete end screen overlay.
+ * @export
+ */
+export function createEndScreenTemplate(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number): string {
+  const { title, scoreText, smileySrc, themeClass } = getEndScreenDetails(result, scoreP1, scoreP2);
+
+  return `
+    <main class="game-screen end-screen ${themeClass}">
+      <div class="end-screen__content">
+        <h2 class="end-screen__title">${title}</h2>
+        
+        <div class="end-screen__visual">
+          <img class="end-screen__smiley" src="${smileySrc}" alt="Game Over Smiley" />
+        </div>
+
+        <p class="end-screen__score">${scoreText}</p>
+        
+        <div class="end-screen__actions">
+          <button id="end-btn-restart" class="btn--retro-lg">PLAY AGAIN</button>
+          <button id="end-btn-menu" class="btn--retro-lg btn--cancel">MAIN MENU</button>
+        </div>
+      </div>
+    </main>
+  `;
+}
