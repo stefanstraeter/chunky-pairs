@@ -1,7 +1,10 @@
-import { createHomeScreenTemplate, createMatchSetupScreenTemplate, createGameScreenTemplate, createEndScreenTemplate } from "../templates/screen-templates";
-import { initGame } from "../features/gameplay/game";
-import { initMatchSetup } from "../features/match-setup/setup-controllers";
-import { initEndScreen } from "../features/end-screen/end-screen-controller";
+import { createHomeScreenTemplate } from "../features/home/home-template";
+import { createMatchSetupScreenTemplate } from "../features/setup/setup-template";
+import { createGameScreenTemplate } from "../features/game/game-template";
+import { createEndScreenTemplate } from "../features/result/result-template";
+import { initGame } from "../features/game/game-controller";
+import { initMatchSetup } from "../features/setup/setup-controllers";
+import { initEndScreen } from "../features/result/result-controller";
 
 /* ==========================================================================
    CORE RENDERING
