@@ -1,6 +1,6 @@
 import { gameState } from "../../state";
 import { createCardTemplate, createHeaderTemplate, createModalTemplate } from "./game-template";
-import { createCardValues } from "./game-helpers";
+import { createCardValues } from "./game-helper";
 import { assetPath } from "../../assets";
 
 /* ==========================================================================
@@ -15,11 +15,8 @@ import { assetPath } from "../../assets";
  * @param {() => void} onRestart - The callback function to be called when the restart button is clicked.
  */
 export function setupGameControls(screen: Element, onBackToSetup: () => void, onRestart: () => void): void {
-  const menuButton = screen.querySelector<HTMLButtonElement>("#btn-goto-setup");
-  const restartButton = screen.querySelector<HTMLButtonElement>("#btn-restart-game");
-
-  menuButton?.addEventListener("click", onBackToSetup);
-  restartButton?.addEventListener("click", onRestart);
+  screen.querySelector("#btn-goto-setup")?.addEventListener("click", onBackToSetup);
+  screen.querySelector("#btn-restart-game")?.addEventListener("click", onRestart);
 }
 
 /**
@@ -40,9 +37,7 @@ export function buildHeader(header: Element): void {
 export function buildGrid(grid: HTMLElement, onCardClick: (card: HTMLElement) => void): void {
   grid.innerHTML = "";
   grid.className = `game-board__grid grid--${gameState.boardSize}`;
-
   const cardValues = createCardValues(gameState.boardSize);
-
   cardValues.forEach((cardName) => grid.appendChild(createCard(cardName, onCardClick)));
 }
 
@@ -63,18 +58,17 @@ export function updateGameLayout(): void {
  */
 export function updateTimerSeconds(seconds: number): void {
   const countdownEl = document.getElementById("turn-timer-countdown");
-
-  if (countdownEl) {
-    countdownEl.textContent = `${seconds}s`;
-  }
+  if (countdownEl) countdownEl.textContent = `${seconds}s`;
 }
 
 /**
- * @description Opens a dynamic confirmation modal.
+ * @description Shows a confirmation modal with the provided title and message, and sets up the confirm and cancel button actions using the provided callback functions.
+ * @export
  * @param {string} title - The title of the modal.
  * @param {string} message - The message content of the modal.
  * @param {() => void} onConfirm - Callback function when the user clicks "Yes".
  * @param {() => void} onCancel - Callback function when the user clicks "No" or closes the modal.
+ * @return {void}
  */
 export function showConfirmationModal(title: string, message: string, onConfirm: () => void, onCancel: () => void): void {
   const container = document.getElementById("exit-modal-container");
@@ -82,18 +76,16 @@ export function showConfirmationModal(title: string, message: string, onConfirm:
 
   container.innerHTML = createModalTemplate(title, message, "Yes", "Never");
 
-  const confirmBtn = document.getElementById("modal-btn-confirm");
-  const cancelBtn = document.getElementById("modal-btn-cancel");
   const closeModal = () => {
     container.innerHTML = "";
   };
 
-  confirmBtn?.addEventListener("click", () => {
+  document.getElementById("modal-btn-confirm")?.addEventListener("click", () => {
     closeModal();
     onConfirm();
   });
 
-  cancelBtn?.addEventListener("click", () => {
+  document.getElementById("modal-btn-cancel")?.addEventListener("click", () => {
     closeModal();
     onCancel();
   });
