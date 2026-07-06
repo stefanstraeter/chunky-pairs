@@ -1,5 +1,9 @@
 import { showMatchSetupScreen } from "../../ui/navigation";
 
+/* ==========================================================================
+  INITIALIZATION OF HOME SCREEN
+   ========================================================================== */
+
 /**
  * @description Initializes interactions for the home screen.
  * @export
