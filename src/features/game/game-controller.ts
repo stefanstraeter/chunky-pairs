@@ -2,7 +2,7 @@ import { gameState } from "../../state";
 import { showMatchSetupScreen } from "../../ui/navigation";
 import { togglePlayer } from "./game-helpers";
 import { buildGrid, buildHeader, setupGameControls, updateGameLayout, updateTimerSeconds, showConfirmationModal } from "./game-view";
-import { showEndScreen } from "../../ui/navigation";
+import { showResultScreen } from "../../ui/navigation";
 
 /* ==========================================================================
    CONSTANTS & VARIABLES
@@ -205,7 +205,7 @@ function finishGame(): void {
   }
 
   // Umschalten auf den brandneuen Screen
-  showEndScreen(result, scoreP1, scoreP2);
+  showResultScreen(result, scoreP1, scoreP2);
 }
 
 /* ==========================================================================
