@@ -1,5 +1,5 @@
 import { gameState } from "../../state";
-import { createCardTemplate, createHeaderTemplate, createModalTemplate } from "../../templates/game-templates";
+import { createCardTemplate, createHeaderTemplate, createModalTemplate } from "./game-template";
 import { createCardValues } from "./game-helpers";
 import { assetPath } from "../../assets";
 
