@@ -1,4 +1,5 @@
 import { assetPath } from "../assets";
+import { getEndScreenDetails } from "../features/end-screen/end-screen-helpers";
 
 /* ==========================================================================
     TEMPLATE HOME SCREEN
@@ -151,38 +152,6 @@ export function createGameScreenTemplate(): string {
 /* ==========================================================================
     ENDSCREEN
     ========================================================================== */
-
-/**
- * @description Internal helper to generate textual and visual details based on match results.
- */
-function getEndScreenDetails(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number) {
-  const scoreText = `FINAL SCORE: ${scoreP1} - ${scoreP2}`;
-
-  if (result === "player-1") {
-    return {
-      title: "PLAYER 1 DOMINATES!",
-      scoreText,
-      smileySrc: assetPath("img/00_general/player-one.svg"),
-      themeClass: "end-screen--p1",
-    };
-  }
-
-  if (result === "player-2") {
-    return {
-      title: "PLAYER 2 DOMINATES!",
-      scoreText,
-      smileySrc: assetPath("img/00_general/player-two.svg"),
-      themeClass: "end-screen--p2",
-    };
-  }
-
-  return {
-    title: "PEACEFUL DRAW",
-    scoreText,
-    smileySrc: assetPath("img/00_general/players-draw.svg"), // Dein Unentschieden-Asset
-    themeClass: "end-screen--draw",
-  };
-}
 
 /**
  * @description Creates the HTML template for the complete end screen overlay.
