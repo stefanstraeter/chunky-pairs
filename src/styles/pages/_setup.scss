@@ -1,0 +1,99 @@
+@use "../abstracts/variables" as v;
+@use "../abstracts/mixins" as m;
+
+.match-setup {
+  @include m.flex-center(column, center);
+  flex: 1;
+  padding: v.$spacing-l;
+
+  &__card {
+    @include m.flex-center(column, center);
+    width: 100%;
+    max-width: 36rem;
+    background-color: v.$color-bg-cream;
+    border: v.$retro-border-thick;
+    border-radius: v.$retro-radius-lg;
+    box-shadow: v.$retro-shadow-lg;
+    padding: v.$spacing-xl;
+    gap: v.$spacing-xl;
+  }
+
+  &__title {
+    text-align: center;
+    color: v.$color-text-dark;
+  }
+
+  &__preview-img {
+    width: 100%;
+    border: v.$retro-border-thin;
+    border-radius: v.$retro-radius-sm;
+    aspect-ratio: 16 / 6;
+    object-fit: cover;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-xl;
+  }
+
+  &__fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__legend {
+    font-family: v.$font-tanker;
+    font-size: v.$font-size-lg;
+    margin-bottom: v.$spacing-s;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: v.$spacing-m;
+
+    &--3col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  &__tile {
+    display: block;
+    position: relative;
+    cursor: pointer;
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    span {
+      display: block;
+      text-align: center;
+      font-size: v.$font-size-md;
+      padding: v.$spacing-m v.$spacing-s;
+      border: v.$retro-border-thin;
+      border-radius: v.$retro-radius-sm;
+      box-shadow: v.$retro-shadow-sm;
+      transition:
+        transform 0.05s ease,
+        box-shadow 0.05s ease;
+    }
+
+    &:hover span {
+      background-color: v.$btn-ui-hover-bg;
+      color: v.$btn-ui-hover-text;
+    }
+
+    input[type="radio"]:checked + span {
+      background-color: v.$btn-ui-primary;
+      color: v.$btn-ui-text;
+      transform: translateY(3px);
+      box-shadow: 0rem 0.0625rem 0rem #16151d;
+    }
+  }
+}
