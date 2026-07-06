@@ -1,4 +1,4 @@
-import { getEndScreenDetails } from "./result-helpers";
+import { getResultDetails } from "./result-helper";
 
 /* ==========================================================================
     RESULT SCREEN TEMPLATE
@@ -9,7 +9,7 @@ import { getEndScreenDetails } from "./result-helpers";
  * @export
  */
 export function createResultScreenTemplate(result: "player-1" | "player-2" | "draw", scoreP1: number, scoreP2: number): string {
-  const { title, scoreText, smileySrc, themeClass } = getEndScreenDetails(result, scoreP1, scoreP2);
+  const { title, scoreText, smileySrc, themeClass } = getResultDetails(result, scoreP1, scoreP2);
 
   return `
     <main class="game-screen end-screen ${themeClass}">
