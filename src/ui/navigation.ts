@@ -4,7 +4,7 @@ import { createGameScreenTemplate } from "../features/game/game-template";
 import { createResultScreenTemplate } from "../features/result/result-template";
 
 import { initHome } from "../features/home/home-controller";
-import { initMatchSetup } from "../features/setup/setup-controllers";
+import { initMatchSetup } from "../features/setup/setup-controller";
 import { initGame } from "../features/game/game-controller";
 import { initResult } from "../features/result/result-controller";
 
@@ -30,7 +30,7 @@ export function renderScreen(htmlContent: string): void {
  */
 export function showHomeScreen(): void {
   renderScreen(createHomeScreenTemplate());
-  initHome(); // Keine DOM-Listener mehr direkt in der Navigation!
+  initHome();
 }
 
 /**
