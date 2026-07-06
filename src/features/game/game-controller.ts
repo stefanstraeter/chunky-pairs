@@ -1,8 +1,7 @@
 import { gameState } from "../../state";
-import { showMatchSetupScreen } from "../../ui/navigation";
-import { togglePlayer } from "./game-helpers";
+import { showResultScreen, showMatchSetupScreen } from "../../ui/navigation";
+import { togglePlayer } from "./game-helper";
 import { buildGrid, buildHeader, setupGameControls, updateGameLayout, updateTimerSeconds, showConfirmationModal } from "./game-view";
-import { showResultScreen } from "../../ui/navigation";
 
 /* ==========================================================================
    CONSTANTS & VARIABLES
@@ -73,6 +72,7 @@ function handleCardClick(card: HTMLElement): void {
 
   if (gameState.flippedCards.length === 2) {
     gameState.isLocked = true;
+    stopTurnTimer();
     checkMatch();
   }
 }
@@ -143,7 +143,6 @@ function handleMatch(first: HTMLElement, second: HTMLElement): void {
   updateGameLayout();
 
   if (gameState.matchedPairs === gameState.boardSize / 2) {
-    stopTurnTimer();
     finishGame();
   } else {
     startTurnTimer();
