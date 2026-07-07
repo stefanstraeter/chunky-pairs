@@ -2,8 +2,7 @@
   TYPES
   ========================================================================== */
 
-export type Theme = "magenta-rush" | "electric-blue";
-
+export type Theme = "retro-arcade" | "pastel-punch";
 export type Player = "player-1" | "player-2";
 
 /* ==========================================================================
