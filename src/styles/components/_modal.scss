@@ -10,7 +10,7 @@
 }
 
 .modal-card {
-  background-color: v.$color-bg-cream;
+  background-color: var(--bg-board);
   border: v.$retro-border-thick;
   box-shadow: v.$retro-shadow-lg;
   padding: 3rem;
