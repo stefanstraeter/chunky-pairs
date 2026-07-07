@@ -88,7 +88,7 @@ function handleExitConfirmation(): void {
     MODAL_TEXTS.EXIT.MESSAGE,
     () => {
       resetState();
-      document.body.dataset.theme = "magenta-rush";
+      document.body.dataset.theme = "retro-arcade";
       showMatchSetupScreen();
     },
     () => {
