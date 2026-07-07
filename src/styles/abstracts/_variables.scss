@@ -23,7 +23,7 @@ $global-config: (
   ),
 
   "colors": (
-    "bg-app-light": #7b2cbf,
+    "bg-app-light": #9539e5,
     "bg-app-dark": #6c1aaa,
     "bg-cream": #f1f1f1,
     "text-dark": #16151d,
@@ -159,7 +159,7 @@ $letter-spacing-wide: config("letter-spacing", "wide");
 :root,
 [data-theme="retro-arcade"] {
   --bg-app-dark: #6c1aaa;
-  --bg-app-light: #7b2cbf;
+  --bg-app-light: #9539e5;
   --bg-board: #f1f1f1;
   --bg-player-card: #f1f1f1;
 
