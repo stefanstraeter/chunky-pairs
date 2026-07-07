@@ -4,7 +4,11 @@
 .match-setup {
   @include m.flex-center(column, center);
   flex: 1;
-  padding: v.$spacing-l;
+  padding: v.$spacing-m;
+
+  @media (min-width: 34rem) {
+    padding: v.$spacing-xl;
+  }
 
   &__card {
     @include m.flex-center(column, center);
@@ -14,8 +18,13 @@
     border: v.$retro-border-thick;
     border-radius: v.$retro-radius-lg;
     box-shadow: v.$retro-shadow-lg;
-    padding: v.$spacing-xl;
-    gap: v.$spacing-xl;
+    padding: v.$spacing-m;
+    gap: v.$spacing-l;
+
+    @media (min-width: 34rem) {
+      padding: v.$spacing-xl;
+      gap: v.$spacing-xl;
+    }
   }
 
   &__title {
@@ -27,8 +36,12 @@
     width: 100%;
     border: v.$retro-border-thin;
     border-radius: v.$retro-radius-sm;
-    aspect-ratio: 16 / 6;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+
+    @media (min-width: 34rem) {
+      aspect-ratio: 16 / 6;
+    }
   }
 
   &__form {
@@ -57,7 +70,11 @@
     gap: v.$spacing-m;
 
     &--3col {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
+
+      @media (min-width: 28rem) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
     }
   }
 
@@ -65,6 +82,7 @@
     display: block;
     position: relative;
     cursor: pointer;
+    user-select: none;
 
     input[type="radio"] {
       position: absolute;
@@ -74,14 +92,20 @@
     span {
       display: block;
       text-align: center;
-      font-size: v.$font-size-md;
-      padding: v.$spacing-m v.$spacing-s;
+      font-size: v.$font-size-sm;
+      padding: v.$spacing-m v.$spacing-xs;
       border: v.$retro-border-thin;
       border-radius: v.$retro-radius-sm;
       box-shadow: v.$retro-shadow-sm;
+      font-weight: v.$font-weight-600;
       transition:
         transform 0.05s ease,
         box-shadow 0.05s ease;
+
+      @media (min-width: 34rem) {
+        font-size: v.$font-size-md;
+        padding: v.$spacing-m v.$spacing-s;
+      }
     }
 
     &:hover span {
@@ -92,7 +116,7 @@
     input[type="radio"]:checked + span {
       background-color: v.$btn-ui-primary;
       color: v.$btn-ui-text;
-      transform: translateY(3px);
+      transform: translateY(0.1875rem);
       box-shadow: 0rem 0.0625rem 0rem #16151d;
     }
   }
