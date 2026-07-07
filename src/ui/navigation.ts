@@ -3,6 +3,7 @@ import { createMatchSetupScreenTemplate } from "../features/setup/setup-template
 import { createGameScreenTemplate } from "../features/game/game-template";
 import { createResultScreenTemplate } from "../features/result/result-template";
 
+import { gameState } from "../state";
 import { initHome } from "../features/home/home-controller";
 import { initMatchSetup } from "../features/setup/setup-controller";
 import { initGame } from "../features/game/game-controller";
@@ -47,6 +48,7 @@ export function showMatchSetupScreen(): void {
  * @export
  */
 export function startGameSequence(): void {
+  document.body.dataset.theme = gameState.theme;
   renderScreen(createGameScreenTemplate());
   initGame();
 }
