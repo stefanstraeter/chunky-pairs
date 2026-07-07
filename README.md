@@ -87,11 +87,11 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173/memory/ in your browser.
+Open `http://localhost:5173/memory/` in your browser.
 
 ---
 
 ## Author
 
-Stefan Sträter
+**Stefan Sträter**
 GitHub: https://github.com/stefanstraeter/
