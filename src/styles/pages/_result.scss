@@ -3,45 +3,45 @@
 
 .result-screen {
   @include m.flex-center(column, center);
-  padding: v.$spacing-l;
+  padding: v.$spacing-m;
+  min-height: 100vh;
 
-  &--p1 {
-    .end-screen__title {
-      color: v.$color-bg-cream;
-    }
+  @media (min-width: 34rem) {
+    padding: v.$spacing-l;
   }
 
-  &--p2 {
-    .end-screen__title {
-      color: v.$color-bg-cream;
-    }
-  }
-
-  &--draw {
-    .end-screen__title {
-      color: v.$color-bg-cream;
-    }
+  &__title {
+    background-color: var(--bg-board);
   }
 
   &__content {
     text-align: center;
+    width: 100%;
+    max-width: 32rem;
     animation: endScreenPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.3);
   }
 
   &__title {
     width: 100%;
-    background-color: v.$color-bg-cream;
     text-align: center;
-    color: v.$color-text-dark;
-    padding: v.$spacing-l v.$spacing-xl;
     border-radius: v.$retro-radius-lg;
     border: v.$retro-border-thick;
     box-shadow: v.$retro-shadow-lg;
+    padding: v.$spacing-l v.$spacing-m;
+
+    @media (min-width: 34rem) {
+      padding: v.$spacing-l v.$spacing-xl;
+    }
   }
 
   &__visual {
-    margin: v.$spacing-3xl auto;
-    height: 10rem;
+    margin: v.$spacing-xl auto;
+    height: 8rem;
+
+    @media (min-width: 34rem) {
+      margin: v.$spacing-3xl auto;
+      height: 10rem;
+    }
   }
 
   &__smiley {
@@ -52,17 +52,28 @@
   }
 
   &__score {
-    font-size: v.$font-size-2xl;
-    color: #fff;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 3rem;
+    font-family: v.$font-tanker;
+    font-size: v.$font-size-xl;
+    color: var(--text-light);
+    letter-spacing: 0.125rem;
+    margin-bottom: v.$spacing-xl;
+
+    @media (min-width: 34rem) {
+      font-size: v.$font-size-2xl;
+      margin-bottom: 3rem;
+    }
   }
 
   &__actions {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    gap: v.$spacing-m;
+
+    @media (min-width: 28rem) {
+      flex-direction: row;
+      gap: 2rem;
+    }
   }
 }
 
@@ -83,6 +94,6 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translateY(-0.75rem);
   }
 }
