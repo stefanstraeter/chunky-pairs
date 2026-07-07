@@ -49,3 +49,9 @@ Clone the repository:
 git clone [https://github.com/stefanstraeter/chunky-pairs.git](https://github.com/stefanstraeter/chunky-pairs.git)
 cd chunky-pairs
 ```
+
+## Development Skripte
+
+- `npm run dev` – Startet den lokalen Vite-Entwicklungsserver
+- `npm run build` – Erstellt den optimierten Produktions-Build im `/dist` Ordner
+- `npm run preview` – Simuliert den Produktions-Build lokal
