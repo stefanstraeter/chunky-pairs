@@ -94,4 +94,5 @@ Open `http://localhost:5173/memory/` in your browser.
 ## Author
 
 **Stefan Sträter**
+
 GitHub: https://github.com/stefanstraeter/
