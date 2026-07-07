@@ -4,34 +4,56 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: color-mix(in srgb, var(--bg-app-dark) 85%, transparent);
   @include m.flex-center();
   z-index: 999;
+  padding: v.$spacing-l;
 }
 
 .modal-card {
   background-color: var(--bg-board);
   border: v.$retro-border-thick;
   box-shadow: v.$retro-shadow-lg;
-  padding: 3rem;
-  max-width: 400px;
+  padding: v.$spacing-xl v.$spacing-l;
+  max-width: 25rem;
   width: 100%;
   text-align: center;
   border-radius: v.$retro-radius-sm;
 
+  @media (min-width: 34rem) {
+    padding: v.$spacing-2xl;
+  }
+
   &__title {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
+    color: var(--text-dark);
+    font-size: v.$font-size-xl;
+    margin-bottom: v.$spacing-s;
+
+    @media (min-width: 34rem) {
+      font-size: v.$font-size-2xl;
+      margin-bottom: v.$spacing-m;
+    }
   }
 
   &__text {
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
+    color: var(--text-dark);
+    font-size: v.$font-size-md;
+    margin-bottom: v.$spacing-l;
+
+    @media (min-width: 34rem) {
+      font-size: v.$font-size-lg;
+      margin-bottom: v.$spacing-xl;
+    }
   }
 
   &__actions {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 1.5rem;
+    gap: v.$spacing-m;
+
+    @media (min-width: 28rem) {
+      flex-direction: row;
+    }
   }
 }
