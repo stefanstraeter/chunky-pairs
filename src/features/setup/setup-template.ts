@@ -19,7 +19,7 @@ export function createMatchSetupScreenTemplate(): string {
         <img
           id="theme-preview"
           class="match-setup__preview-img"
-          src="${assetPath("/img/01_themes/vibes_theme/vibe_theme.png")}"
+          src="${assetPath("/img/00_general/theme-retro-arcade.png")}"
           alt="Theme preview"
         />
 
@@ -28,12 +28,12 @@ export function createMatchSetupScreenTemplate(): string {
             <legend class="match-setup__legend">Select Vibe</legend>
             <div class="match-setup__grid">
               <label class="match-setup__tile">
-                <input type="radio" name="theme" value="magenta-rush" />
-                <span>Magenta Rush</span>
+                <input type="radio" name="theme" value="retro-arcade" />
+                <span>Retro Arcade</span>
               </label>
               <label class="match-setup__tile">
-                <input type="radio" name="theme" value="electric-blue" />
-                <span>Electric Blue</span>
+                <input type="radio" name="theme" value="pastel-punch" />
+                <span>Pastel Punch</span>
               </label>
             </div>
           </fieldset>
