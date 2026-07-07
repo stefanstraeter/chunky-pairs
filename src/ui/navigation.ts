@@ -19,7 +19,11 @@ import { initResult } from "../features/result/result-controller";
  */
 export function renderScreen(htmlContent: string): void {
   const appRoot = document.getElementById("app");
-  if (appRoot) appRoot.innerHTML = htmlContent;
+  if (appRoot) {
+    appRoot.innerHTML = htmlContent;
+    // Prevent stale scroll offsets from the previous screen affecting new layouts.
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
 }
 
 /* ==========================================================================
