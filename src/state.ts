@@ -5,7 +5,7 @@ import type { GameState } from "./types";
   ========================================================================== */
 
 export const gameState: GameState = {
-  theme: "magenta-rush",
+  theme: "retro-arcade",
   player: "player-1",
   boardSize: 16,
   currentPlayer: "player-1",
