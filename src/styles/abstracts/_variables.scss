@@ -23,8 +23,8 @@ $global-config: (
   ),
 
   "colors": (
-    "bg-violet-light": #7b2cbf,
-    "bg-violet-dark": #6c1aaa,
+    "bg-app-light": #7b2cbf,
+    "bg-app-dark": #6c1aaa,
     "bg-cream": #f1f1f1,
     "text-dark": #16151d,
     "text-light": #f1f1f1,
@@ -80,49 +80,6 @@ $global-config: (
 $content-width: 87.5rem;
 
 /* ============================================================
-   THEMES (MAPPED TO MAGENTA RUSH & ELECTRIC BLUE)
-   ============================================================ */
-
-$themes: (
-  "magenta-rush": (
-    "main-bg-dark": #1a1235,
-    "main-bg-light": #7141f5,
-    "player-1": #fc1c50,
-    "player-2": #fc8844,
-    "btn-primary-bg": #fc1c50,
-    "btn-primary-text": #ffffff,
-    "btn-exit-bg": #1a1235,
-    "btn-exit-hover": #582cd1,
-    "btn-exit-text": #ffffff,
-    "btn-back-bg": #fc8844,
-    "btn-back-hover": #ffb366,
-    "card-back": #ffffff,
-    "status-font-size": 1.25rem,
-    "status-font-weight": 700,
-    "scores-bg": #ffffff,
-  ),
-
-  "electric-blue": (
-    "main-bg": #0b132b,
-    "main-bg-dark": #0b132b,
-    "main-bg-light": #1c2541,
-    "player-1": #00b4d8,
-    "player-2": #ff70a6,
-    "btn-primary-bg": #00b4d8,
-    "btn-primary-text": #000000,
-    "btn-exit-bg": #ffffff,
-    "btn-exit-hover": #ebebeb,
-    "btn-exit-text": #000000,
-    "btn-back-bg": #ff70a6,
-    "btn-back-hover": #ff97c1,
-    "card-back": #ffffff,
-    "status-font-size": 1rem,
-    "status-font-weight": 800,
-    "scores-bg": #ffffff,
-  ),
-);
-
-/* ============================================================
    HELPER FUNCTIONS FOR QUICK ACCESS
    ============================================================ */
 
@@ -148,8 +105,8 @@ $retro-shadow-lg: config("retro", "shadow-lg");
 $retro-shadow-sm: config("retro", "shadow-sm");
 $retro-shadow-active: config("retro", "shadow-active");
 
-$color-bg-violet-light: config("colors", "bg-violet-light");
-$color-bg-violet-dark: config("colors", "bg-violet-dark");
+$color-bg-app-light: config("colors", "bg-app-light");
+$color-bg-app-dark: config("colors", "bg-app-dark");
 $color-bg-cream: config("colors", "bg-cream");
 
 $color-text-dark: config("colors", "text-dark");
@@ -194,3 +151,44 @@ $font-weight-800: config("font-weight", "800");
 $letter-spacing-tight: config("letter-spacing", "tight");
 $letter-spacing-normal: config("letter-spacing", "normal");
 $letter-spacing-wide: config("letter-spacing", "wide");
+
+/* ============================================================
+  THEMES
+   ============================================================ */
+
+:root,
+[data-theme="retro-arcade"] {
+  --bg-app-dark: #6c1aaa;
+  --bg-app-light: #7b2cbf;
+  --bg-board: #f1f1f1;
+  --bg-player-card: #f1f1f1;
+
+  --card-front: #6c1aaa;
+  --card-back: #f1f1f1;
+
+  --text-dark: #16151d;
+  --text-light: #f1f1f1;
+
+  --player-1: #fc1c50;
+  --player-2: #fc8844;
+
+  --btn-outline-text: #16151d;
+}
+
+[data-theme="pastel-punch"] {
+  --bg-app-dark: #65589d;
+  --bg-app-light: #afa8dd;
+  --bg-board: #ffc6c6;
+  --bg-player-card: #ffc6c6;
+
+  --card-front: #65589d;
+  --card-back: #f1f1f1;
+
+  --text-dark: #16151d;
+  --text-light: #f1f1f1;
+
+  --player-1: #fc1c50;
+  --player-2: #fc8844;
+
+  --btn-outline-text: #16151d;
+}
