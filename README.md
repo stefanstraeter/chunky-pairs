@@ -54,19 +54,20 @@ Focus areas include:
 
 ```text
 src/
-  abstracts/
-    _variables.scss
-    _mixins.scss
-  components/
-    _buttons.scss
-    _cards.scss
-    _modal.scss
-  features/
-    _setup.scss
-    _game.scss
-    _results.scss
-  templates/
-    game.template.ts
+├── features/          # Domain-specific modules (Controller, View, Helper, Templates)
+│   ├── game/
+│   ├── home/
+│   ├── result/
+│   └── setup/
+├── styles/            # Scalable SASS 7-1 Architecture Layer
+│   ├── abstracts/     # Mixins, design tokens, and core variables
+│   ├── base/          # Reset rules, typography, and boilerplate styles
+│   ├── components/    # Reusable UI elements (buttons, cards, modals)
+│   └── pages/         # View-specific layout logic
+├── ui/                # Cross-cutting UI handlers (navigation, theme injection)
+├── main.ts            # Application entry point
+├── state.ts           # Centralized gameplay state engine
+└── types.ts           # Shared TypeScript definitions
 ```
 
 ---
