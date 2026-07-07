@@ -78,10 +78,14 @@ Clone the repository:
 ```bash
 git clone https://github.com/stefanstraeter/chunky-pairs.git
 cd chunky-pairs
+```
 
 Install dependencies and start the development server:
+
+```bash
 npm install
 npm run dev
+```
 
 Open http://localhost:5173/memory/ in your browser.
 
@@ -91,4 +95,3 @@ Open http://localhost:5173/memory/ in your browser.
 
 Stefan Sträter
 GitHub: https://github.com/stefanstraeter/
-```
