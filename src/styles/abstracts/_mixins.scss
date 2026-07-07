@@ -4,15 +4,3 @@
   align-items: center;
   justify-content: $justify;
 }
-
-@mixin themed() {
-  [data-theme="magenta-rush"] & {
-    @content;
-  }
-}
-
-@mixin electric-blue-themed() {
-  [data-theme="electric-blue"] & {
-    @content;
-  }
-}
