@@ -4,7 +4,7 @@ A vibrant, fast-paced memory card game built with a distinct Neo-Brutalist desig
 
 Train your brain across multiple grid sizes, challenge a friend in local multiplayer mode, and switch between retro arcade and pastel punch theme profiles.
 
-🔗 **Live Demo:** [https://stefanstraeter.github.io/memory/](https://stefanstraeter.github.io/memory/)
+🔗 **Live Demo:** https://stefanstraeter.github.io/memory/
 
 ---
 
@@ -43,37 +43,28 @@ Focus areas include:
 
 ## Tech Stack
 
-- HTML5 (semantic markup for game views)
-- SCSS / CSS3 (Modular 7-1 architecture, Flexbox, Grid, and Theme Tokens)
-- TypeScript / JavaScript (State-driven gameplay engine & view management)
-- Vite (Next-generation frontend tooling and production bundling)
+- **HTML5** (semantic markup for game views)
+- **SCSS / CSS3** (Modular 7-1 architecture, Flexbox, Grid, and Theme Tokens)
+- **TypeScript / JavaScript** (State-driven gameplay engine & view management)
+- **Vite** (Next-generation frontend tooling and production bundling)
 
 ---
 
 ## Project Structure
 
+```text
 src/
-abstracts/
-\_variables.scss
-\_mixins.scss
-components/
-\_buttons.scss
-\_cards.scss
-\_modal.scss
-features/
-\_setup.scss
-\_game.scss
-\_results.scss
-templates/
-game.template.ts
-
----
-
-## Getting Started
-
-Clone the repository:
-
-```bash
-git clone https://github.com/stefanstraeter/chunky-pairs.git
-cd chunky-pairs
+  abstracts/
+    _variables.scss
+    _mixins.scss
+  components/
+    _buttons.scss
+    _cards.scss
+    _modal.scss
+  features/
+    _setup.scss
+    _game.scss
+    _results.scss
+  templates/
+    game.template.ts
 ```
