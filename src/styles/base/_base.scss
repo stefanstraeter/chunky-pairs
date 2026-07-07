@@ -2,7 +2,7 @@
 
 body {
   position: relative;
-  background-color: v.$color-bg-violet-light;
+  background-color: v.$color-bg-app-light;
 
   &::after {
     content: "";
@@ -11,10 +11,26 @@ body {
     left: 0;
     width: 100%;
     height: 25vh;
-    background-color: v.$color-bg-violet-dark;
+    background-color: v.$color-bg-app-dark;
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
     z-index: -1;
+  }
+
+  &[data-theme="retro-arcade"] {
+    background-color: var(--bg-app-light);
+
+    &::after {
+      background-color: var(--bg-app-dark);
+    }
+  }
+
+  &[data-theme="pastel-punch"] {
+    background-color: var(--bg-app-light);
+
+    &::after {
+      background-color: var(--bg-app-dark);
+    }
   }
 }
 
@@ -30,35 +46,3 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-/*
-body {
-  &::after {
-    content: "";
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 20vh;
-    background-color: v.$color-bg-violet;
-    border-top-left-radius: 4rem;
-    border-top-right-radius: 4rem;
-
-    z-index: -1;
-  }
-}
-#app {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background-color: transparent;
-}
-
-.screen {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-
-*/
