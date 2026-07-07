@@ -4,7 +4,7 @@ A vibrant, fast-paced memory card game built with a distinct Neo-Brutalist desig
 
 Train your brain across multiple grid sizes, challenge a friend in local multiplayer mode, and switch between retro arcade and pastel punch theme profiles.
 
-🔗 **Live Demo:** https://stefanstraeter.github.io/memory/
+🔗 **Live Demo:** https://stefanstraeter.github.io/chunky-pairs/
 
 ---
 
