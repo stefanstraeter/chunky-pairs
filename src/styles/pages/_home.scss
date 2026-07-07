@@ -6,11 +6,19 @@
   position: relative;
   padding: v.$spacing-m;
 
+  @media (min-width: 34rem) {
+    padding: v.$spacing-xl;
+  }
+
   &__content {
     width: 100%;
     max-width: 42rem;
     @include m.flex-center(column, center);
-    gap: v.$spacing-xl;
+    gap: v.$spacing-l;
+
+    @media (min-width: 34rem) {
+      gap: v.$spacing-xl;
+    }
   }
 
   &__title {
@@ -18,10 +26,14 @@
     background-color: v.$color-bg-cream;
     text-align: center;
     color: v.$color-text-dark;
-    padding: v.$spacing-l v.$spacing-xl;
     border-radius: v.$retro-radius-lg;
     border: v.$retro-border-thick;
     box-shadow: v.$retro-shadow-lg;
+    padding: v.$spacing-l v.$spacing-m;
+
+    @media (min-width: 34rem) {
+      padding: v.$spacing-l v.$spacing-xl;
+    }
   }
 
   &__actions {
