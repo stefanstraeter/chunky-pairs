@@ -77,7 +77,7 @@ function setupThemeHoverListeners(): void {
 
     labelElement?.addEventListener("mouseleave", () => {
       const activeRadio = document.querySelector<HTMLInputElement>('input[name="theme"]:checked');
-      updateThemePreview(activeRadio?.value ?? "magenta-rush");
+      updateThemePreview(activeRadio?.value ?? "retro-arcade");
     });
   });
 }
@@ -120,7 +120,7 @@ function setupBoardSizeRadios(): void {
 function saveMatchSetupToState(): void {
   const { theme, player, size } = getSelectedSetupElements();
 
-  gameState.theme = (theme?.value ?? "magenta-rush") as Theme;
+  gameState.theme = (theme?.value ?? "retro-arcade") as Theme;
   gameState.player = (player?.value ?? "player-1") as "player-1" | "player-2";
   gameState.boardSize = parseInt(size?.value ?? "16", 10);
 
