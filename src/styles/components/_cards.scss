@@ -43,12 +43,12 @@
   }
 
   &__front {
-    background-color: v.$color-bg-violet-light;
+    background-color: var(--card-front);
   }
 
   &__back {
     transform: rotateY(180deg);
-    background-color: v.$color-bg-cream;
+    background-color: var(--card-back);
 
     img {
       width: 70%;
