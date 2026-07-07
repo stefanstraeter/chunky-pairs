@@ -71,8 +71,6 @@ src/
 
 ---
 
----
-
 ## Getting Started
 
 Clone the repository:
