@@ -4,7 +4,7 @@
 .result-screen {
   @include m.flex-center(column, center);
   padding: v.$spacing-m;
-  min-height: 100vh;
+  min-height: 100dvh;
 
   @media (min-width: 34rem) {
     padding: v.$spacing-l;
