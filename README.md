@@ -68,3 +68,24 @@ src/
   templates/
     game.template.ts
 ```
+
+---
+
+## Getting Started
+
+Clone the repository:
+git clone [https://github.com/stefanstraeter/chunky-pairs.git](https://github.com/stefanstraeter/chunky-pairs.git)
+cd chunky-pairs
+
+Install dependencies and start the development server:
+npm install
+npm run dev
+
+Open http://localhost:5173/memory/ in your browser.
+
+---
+
+## Author
+
+Stefan Sträter
+GitHub: https://github.com/stefanstraeter/
