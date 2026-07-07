@@ -11,6 +11,8 @@
   cursor: pointer;
   perspective: 1000px;
   position: relative;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   &__inner {
     position: relative;
@@ -37,8 +39,8 @@
 
   &:active:not(.is-flipped):not(.is-matched) {
     .card__front {
-      transform: translate(2px, 2px);
-      box-shadow: v.$retro-shadow-sm;
+      transform: translate(0.125rem, 0.125rem);
+      box-shadow: 0rem 0.0625rem 0rem var(--text-dark);
     }
   }
 
@@ -79,18 +81,16 @@
 
   &--matched-player-1 {
     .card__back {
-      border-color: var(--player-1);
+      border-color: var(--text-dark);
       background-color: var(--player-1);
-      border: v.$retro-border-thin;
       box-shadow: v.$retro-shadow-sm;
     }
   }
 
   &--matched-player-2 {
     .card__back {
-      border-color: var(--player-2);
+      border-color: var(--text-dark);
       background-color: var(--player-2);
-      border: v.$retro-border-thin;
       box-shadow: v.$retro-shadow-sm;
     }
   }
