@@ -71,10 +71,14 @@ src/
 
 ---
 
+---
+
 ## Getting Started
 
 Clone the repository:
-git clone [https://github.com/stefanstraeter/chunky-pairs.git](https://github.com/stefanstraeter/chunky-pairs.git)
+
+```bash
+git clone https://github.com/stefanstraeter/chunky-pairs.git
 cd chunky-pairs
 
 Install dependencies and start the development server:
@@ -89,3 +93,4 @@ Open http://localhost:5173/memory/ in your browser.
 
 Stefan Sträter
 GitHub: https://github.com/stefanstraeter/
+```
