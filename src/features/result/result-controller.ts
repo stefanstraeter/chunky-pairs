@@ -18,7 +18,7 @@ export function initResult(): void {
   });
 
   menuBtn?.addEventListener("click", () => {
-    document.body.dataset.theme = "magenta-rush";
+    document.body.dataset.theme = "retro-arcade";
     showMatchSetupScreen();
   });
 }
