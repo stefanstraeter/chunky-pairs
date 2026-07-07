@@ -5,6 +5,6 @@ import { assetPath } from "../assets";
   ========================================================================== */
 
 export const themePreviews = {
-  "magenta-rush": assetPath("/img/01_themes/vibes_theme/vibe_theme.png"),
-  "electric-blue": assetPath("/img/01_themes/game_theme/game_theme.png"),
+  "retro-arcade": assetPath("/img/00_general/theme-retro-arcade.png"),
+  "pastel-punch": assetPath("/img/00_general/theme-pastel-punch.png"),
 };
