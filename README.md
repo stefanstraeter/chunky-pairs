@@ -10,7 +10,7 @@ Train your brain across multiple grid sizes, challenge a friend in local multipl
 
 ## Preview
 
-![Chunky Pairs Preview](/img/00_general/chunky-pairs-mockup.png)
+![Chunky Pairs Preview](public/img/00_general/chunky-pairs-mockup.png)
 
 ---
 
