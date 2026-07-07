@@ -5,7 +5,7 @@
   @include m.flex-center(column, start);
   gap: v.$spacing-l;
   padding: v.$spacing-l v.$spacing-m;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
 
   @media (min-width: 64rem) {
