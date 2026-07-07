@@ -5,14 +5,14 @@ import { themePreviews } from "../../ui/theme";
    ========================================================================== */
 
 /**
- * @description Returns the preview image path for the given theme radio button value. If the provided value does not match any key in the themePreviews object, it defaults to the "magenta-rush" theme preview.
+ * @description Returns the preview image path for the given theme radio button value. If the provided value does not match any key in the themePreviews object, it defaults to the "retro-arcade" theme preview.
  * @export
  * @param {string} radioValue
  * @return {*}  {string}
  */
 export function getPreviewImagePath(radioValue: string): string {
   const key = radioValue as keyof typeof themePreviews;
-  return themePreviews[key] ?? themePreviews["magenta-rush"];
+  return themePreviews[key] ?? themePreviews["retro-arcade"];
 }
 
 /**
