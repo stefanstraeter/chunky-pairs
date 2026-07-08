@@ -56,6 +56,8 @@
     padding: 0;
     margin: 0;
     width: 100%;
+    min-width: 0;
+    display: block;
   }
 
   &__legend {
@@ -83,6 +85,8 @@
     position: relative;
     cursor: pointer;
     user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 
     input[type="radio"] {
       position: absolute;
@@ -92,14 +96,17 @@
     span {
       display: block;
       text-align: center;
-      font-size: v.$font-size-sm;
+      font-size: v.$font-size-md;
+      letter-spacing: v.$letter-spacing-wide;
       padding: v.$spacing-m v.$spacing-xs;
       border: v.$retro-border-thin;
       border-radius: v.$retro-radius-sm;
       box-shadow: v.$retro-shadow-sm;
       font-weight: v.$font-weight-600;
+      will-change: transform, box-shadow;
+      transform: translate3d(0, 0, 0);
       transition:
-        transform 0.05s ease,
+        transform 0.05s cubic-bezier(0.175, 0.885, 0.32, 1.275),
         box-shadow 0.05s ease;
 
       @media (min-width: 34rem) {
@@ -116,7 +123,7 @@
     input[type="radio"]:checked + span {
       background-color: v.$btn-ui-primary;
       color: v.$btn-ui-text;
-      transform: translateY(0.1875rem);
+      transform: translate3d(0, 0.1875rem, 0);
       box-shadow: 0rem 0.0625rem 0rem #16151d;
     }
   }
