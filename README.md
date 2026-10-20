@@ -1,99 +1,113 @@
+<div align="center">
+
 # CHUNKY PAIRS
 
-A vibrant, fast-paced memory card game built with a distinct Neo-Brutalist design aesthetic, modular architecture, and dynamic gameplay flows.
+**Flip cards, find matching pairs and race the clock in a head-to-head memory game.**
 
-Train your brain across multiple grid sizes, challenge a friend in local multiplayer mode, and switch between retro arcade and pastel punch theme profiles.
+TypeScript · Vite · SCSS
 
-🔗 **Live Demo:** https://stefanstraeter.github.io/chunky-pairs/
+[Live demo](https://stefanstraeter.github.io/chunky-pairs/)
 
----
+<br />
 
-## Preview
+![Chunky Pairs preview](public/img/00_general/chunky-pairs.gif)
 
-![Chunky Pairs Preview](public/img/00_general/chunky-pairs-mockup.png)
-
----
-
-## Features
-
-- **Dynamic Grid Sizes** – Play with 16, 24, or 36 cards depending on the desired difficulty.
-- **Local Multiplayer** – Competitive 2-player turn-based mode with live score tracking.
-- **Neo-Brutalist Themes** – Instant toggle between "Retro Arcade" and "Pastel Punch" via real-time CSS variables.
-- **Intense Turn Timer** – A countdown widget that puts pressure on players to find pairs quickly.
-- **True Mobile-First UX** – Complete UI reshuffling via CSS Flexbox/Grid and touch-friendly tap targets.
-- **Tactile Interaction Design** – Satisfying 3D-press effects on buttons and cards with anti-clamping scroll/zoom containment.
-- **Polished Animations** – Smooth 3D card flips, brutalist spring effects, and bouncy end-screen interactions.
+</div>
 
 ---
 
-## Purpose
+## About
 
-This project was developed as part of a frontend training program at the Developer Akademie.
+Chunky Pairs is a mobile-first memory card game with a bold Neo-Brutalist look. Choose a board, pick a visual theme and starting player, then compete in local multiplayer. Find matching pairs before the turn timer runs out and see who claimed the most pairs.
 
-It demonstrates how to build an interactive, high-performance web game from scratch using modular architecture, modern SCSS layouts, and dynamic theme tokens.
+The project was developed as part of a frontend training program at Developer Akademie. It focuses on responsive layouts, modular TypeScript and a theme system built with CSS custom properties.
 
-Focus areas include:
+---
 
-- Mobile-First responsive shifting (re-ordering layouts across device breakpoints)
-- Advanced CSS Grid structures for fluid, aspect-ratio locked layouts
-- Token-based design systems using native CSS variables inside SASS structures
-- Clean state-driven DOM updates for game logic and timing events
+## Highlights
+
+- **Three board sizes** – Choose a 16-, 24- or 36-card game.
+- **Local multiplayer** – Two players take turns on the same device. Scores update as pairs are found.
+- **Timed turns** – Each turn has a 10-second countdown. A timeout passes the turn to the other player.
+- **Two visual themes** – Switch between Retro Arcade and Pastel Punch.
+- **Clear match flow** – Set up a game, play on a shuffled board, then view the winner or a draw on the results screen.
+- **Responsive interface** – Layouts adapt for smaller screens, with touch-friendly cards and controls.
+- **Tactile details** – Animated card flips, press effects and playful end-screen interactions bring the game to life.
 
 ---
 
 ## Tech Stack
 
-- **HTML5** (semantic markup for game views)
-- **SCSS / CSS3** (Modular 7-1 architecture, Flexbox, Grid, and Theme Tokens)
-- **TypeScript / JavaScript** (State-driven gameplay engine & view management)
-- **Vite** (Next-generation frontend tooling and production bundling)
-
----
-
-## Project Structure
-
-```text
-src/
-├── features/          # Domain-specific modules (Controller, View, Helper, Templates)
-│   ├── game/
-│   ├── home/
-│   ├── result/
-│   └── setup/
-├── styles/            # Scalable SASS 7-1 Architecture Layer
-│   ├── abstracts/     # Mixins, design tokens, and core variables
-│   ├── base/          # Reset rules, typography, and boilerplate styles
-│   ├── components/    # Reusable UI elements (buttons, cards, modals)
-│   └── pages/         # View-specific layout logic
-├── ui/                # Cross-cutting UI handlers (navigation, theme injection)
-├── main.ts            # Application entry point
-├── state.ts           # Centralized gameplay state engine
-└── types.ts           # Shared TypeScript definitions
-```
+- **TypeScript** for game state, interactions and screen controllers
+- **Vite** for local development and production builds
+- **SCSS / CSS** with modular styles, responsive layouts and theme variables
+- **HTML** templates rendered by the application
+- **Tanker** self-hosted display font
 
 ---
 
 ## Getting Started
 
-Clone the repository:
-
 ```bash
 git clone https://github.com/stefanstraeter/chunky-pairs.git
 cd chunky-pairs
-```
-
-Install dependencies and start the development server:
-
-```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:5173/memory/` in your browser.
+Open the local URL printed by Vite (usually `http://localhost:5173/chunky-pairs/`).
+
+Create a production build with:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+<details>
+<summary><strong>Project structure</strong></summary>
+
+<br />
+
+```text
+src/
+├── features/                 # Screen-specific templates, controllers and game logic
+│   ├── game/                 # Board, card interactions and turn timer
+│   ├── home/                 # Landing screen
+│   ├── result/               # Winner and score screen
+│   └── setup/                # Theme, player and board-size selection
+├── styles/                   # SCSS design system and page styles
+│   ├── abstracts/            # Variables and mixins
+│   ├── base/                 # Reset and typography
+│   ├── components/           # Buttons, cards and modal
+│   └── pages/                # Screen-specific layouts
+├── ui/                       # Screen navigation and theme configuration
+├── main.ts                   # Application entry point
+├── state.ts                  # Shared game state
+└── types.ts                  # Shared TypeScript types
+
+public/
+├── fonts/                    # Self-hosted Tanker font
+└── img/                      # Theme previews, card art and interface assets
+```
+
+The application moves between the home, game setup, game board and results screens without a page reload.
+
+</details>
+
+---
+
+## Good to know
+
+Chunky Pairs is a client-side game. Game state and scores exist only for the current session; there is no account system, backend or online multiplayer.
 
 ---
 
 ## Author
 
-**Stefan Sträter**
-
-GitHub: https://github.com/stefanstraeter/
+**Stefan Sträter** · [github.com/stefanstraeter](https://github.com/stefanstraeter/)
